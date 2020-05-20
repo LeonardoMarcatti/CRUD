@@ -1,1 +1,2 @@
 This CRUD is meant for registering clientes in a data bank. You can store, update, get and delete clientes from and in the data bank. It is easy to do so.
+Esse sistema CRUD foi feito para registrar clientes em um banco de dados. Você pode adicionar, alterar, ler e deletar clientes de uma tabela. E é bem fácil de fazer!
