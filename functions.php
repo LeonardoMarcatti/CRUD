@@ -19,7 +19,6 @@
         $current_user = $_SESSION['user'];
         $sql = "select u.id, nome, caminho, iduser from users u join image i on u.id = i.iduser where u.nome_de_usuario = '$current_user'";
         $path = $conection->query($sql)->fetch()['caminho'];
-        $alt = $conection->query($sql)->fetch()['nome'];
         return $path;
     };
 
