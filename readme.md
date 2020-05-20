@@ -1,0 +1,1 @@
+This CRUD is meant for registering clientes in a data bank. You can store, update, get and delete clientes from and in the data bank. It is easy to do so.
