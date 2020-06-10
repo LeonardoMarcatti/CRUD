@@ -4,6 +4,7 @@
     session_start();
     if (!isset($_GET['codendereco'])) {
         header('location: login.php');
+        exit;
     };
     include('functions.php');
 

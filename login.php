@@ -19,6 +19,7 @@
         if ($result) {
             $_SESSION['user'] = $user;
             header('location: crud.php');
+            exit;
         } else{
             unset($user);
             unset($password);

@@ -1,6 +1,7 @@
 <?php
     if (!isset($_SESSION['user'])) {
         header('location: login.php');
+        exit;
     };
 
     $server = 'localhost';
@@ -19,7 +20,11 @@
         $current_user = $_SESSION['user'];
         $sql = "select u.id, nome, caminho, iduser from users u join image i on u.id = i.iduser where u.nome_de_usuario = '$current_user'";
         $path = $conection->query($sql)->fetch()['caminho'];
-        return $path;
+        if ($path) {
+            return $path;
+        } else {
+            return false;
+        };        
     };
 
 
@@ -28,7 +33,11 @@
         $current_user = $_SESSION['user'];
         $sql = "select u.id, nome, caminho, iduser from users u join image i on u.id = i.iduser where u.nome_de_usuario = '$current_user'";
         $alt = $conection->query($sql)->fetch()['nome'];
-        return $alt;
+        if ($alt) {
+            return $alt;
+        } else {
+            return false;
+        };        
     };
 
     function GetValue($value){
@@ -129,6 +138,7 @@
 
         if ($r1 && $r2 &&$r3 && $r4) {
             header('location: crud.php');
+            exit;
         };       
     };
 

@@ -3,7 +3,6 @@
     session_start();
     include_once('functions.php');
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
@@ -25,7 +24,7 @@
                         <a href=logout.php id=sair>Sair</a>
                     </div>
             </div>";
-    ?>
+        ?>
         <ul class="nav nav-tabs" id="abas" role="tab">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu_consulta">Consulta e Alteração</a>
@@ -65,7 +64,7 @@
                         </form>
                             <?php
                                 include('tabela_consulta.php');
-                            ?>                   
+                            ?>
                     </div>
                 </div>
             <div class="tab-pane fade" id="cadastra_clientes" role="tabpanel" aria-labelledby="clientes-tab">
@@ -84,7 +83,7 @@
                     <div class="form-row form-group">
                         <div class="col">
                             <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="masculino" name="sex" class="custom-control-input" value="M" required=""> 
+                                <input type="radio" id="masculino" name="sex" class="custom-control-input" value="M" required="">
                                 <label class="custom-control-label" for="masculino">Masculino</label>
                             </div>
                             <div class="custom-control custom-radio custom-control-inline">
@@ -204,8 +203,7 @@
                     </form>
                 </div>
             </div>
-        </div>                  
-    </body>
+        </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>

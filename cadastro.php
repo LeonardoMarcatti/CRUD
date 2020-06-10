@@ -19,7 +19,16 @@
         $senha = md5($_POST['senha']);
         $sql = "INSERT INTO users(nome_de_usuario, senha, nome) VALUES('$username', '$senha', '$nomecompleto')";
         $novo_cadastro = $conection->query($sql);
+        CheckFile($_FILES['myfile']);
+    };
+
+    function CheckFile($val1){
+        $type = $val1['type'];
+       if ($type == 'image/jpeg') {
         Submit($_FILES['myfile']);
+       } else {
+          return false;
+       };
     };
 
     function GeraCodigo(){
