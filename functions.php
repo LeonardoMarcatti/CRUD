@@ -143,22 +143,21 @@
     };
 
     if (isset($_POST['logradouro'], $_POST['endereco'], $_POST['numero'], $_POST['bairro'], $_POST['cidade'], $_POST['estado'])){
-        $logradouro = $_POST['logradouro'];
-        $endereco = $_POST['endereco'];
-        $numero = $_POST['numero'];
-        $complemento = $_POST['complemento'];
-        $bairro = $_POST['bairro'];
-        $cidade = $_POST['cidade'];
-        $estado = $_POST['estado'];
-
+        $logradouro = filter_input(INPUT_POST, 'logradouro', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY);
+        $endereco = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY);
+        $numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY);
+        $complemento = filter_input(INPUT_POST, 'complemento', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY);
+        $bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
+        $cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING, FILTER_REQUIRE_ARRAY);
+        $estado = filter_input(INPUT_POST, 'estado', FILTER_SANITIZE_NUMBER_INT, FILTER_REQUIRE_ARRAY);
+    
         if (isset($_POST['nome'], $_POST['sobre_nome'], $_POST['sex'], $_POST['ddd'], $_POST['telefone'], $_POST['tipo_telefone'], $_POST['email'] )) {
-            $nome = $_POST['nome'] . ' ' . $_POST['sobre_nome'];
-            $sex = $_POST['sex'];
-            $ddd = $_POST['ddd'];
-            $telefone = $_POST['telefone'];
-            $tipo = $_POST['tipo_telefone'];
-            $email = $_POST['email'];
-
+            $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING) . ' ' . filter_input(INPUT_POST, 'sobre_nome', FILTER_SANITIZE_STRING);
+            $sex = filter_input(INPUT_POST, 'sex', FILTER_SANITIZE_STRING);
+            $ddd = filter_input(INPUT_POST, 'ddd', FILTER_SANITIZE_NUMBER_INT);
+            $telefone = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
+            $tipo = filter_input(INPUT_POST, 'tipo_telefone', FILTER_SANITIZE_SPECIAL_CHARS);
+            $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 
             $sex_id =  $conection->query("select id from sexo where genero = '$sex'")->fetch()['id'];
             $conection->query("insert into cliente(nome, sexo) values('$nome', $sex_id)");
