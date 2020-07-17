@@ -1,21 +1,15 @@
 <?php 
-    $server = 'localhost';
-    $db = 'CRUD';
-    $user = 'leo';
-    $password = 'leo';
-    try {
-        $conection = new PDO("mysql:host=$server; dbname=$db", "$user", "$password");
-    } catch (Throwable $th) {
-        echo 'Erro linha: ' . $th->getLine() . "<br>";
-        echo ('Código: ' . $th->getMessage());
-    };
-
+    require_once 'conection.php';
     session_start();
     if (isset($_POST['user']) && isset($_POST['password'])) {
-        $user = md5($_POST['user']);
-        $password = md5($_POST['password']);
-        $sql = "select id from users where nome_de_usuario = '$user' and senha = '$password'";
-        $result = $conection->query($sql)->fetch()['id'];
+        $user = md5(filter_input(INPUT_POST, 'user', FILTER_SANITIZE_STRING));
+        $password = md5(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING));
+        $sql = "select id from users where nome_de_usuario = :user and senha = :password";
+        $result = $conection->prepare($sql);
+        $result->bindValue(':user', $user);
+        $result->bindValue(':password', $password);
+        $result->execute();
+        $result->fetch(pdo::FETCH_ASSOC)['id'];
         if ($result) {
             $_SESSION['user'] = $user;
             header('location: crud.php');
@@ -25,7 +19,7 @@
             unset($password);
             unset($_POST['user']);
             unset($_POST['password']);
-        }
+        };
     } 
 ?>
 <!DOCTYPE html>

@@ -1,24 +1,19 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
+    require_once 'conection.php';
     $novo_cadastro = '';
-    $server = 'localhost';
-    $db = 'CRUD';
-    $user = 'root';
-    $password = '';
-    try {
-        $conection = new PDO("mysql:host=$server; dbname=$db", "$user", "$password");
-    } catch (Throwable $th) {
-        echo 'Erro linha: ' . $th->getLine() . "<br>";
-        echo 'Código: ' . $th->getMessage();
-    };
 
     //Função para novo cadastro.
     if (isset($_POST['nome']) && isset($_POST['username']) && isset($_POST['senha'])) {
-        $nomecompleto = $_POST['nome'];
-        $username = md5($_POST['username']);
-        $senha = md5($_POST['senha']);
-        $sql = "INSERT INTO users(nome_de_usuario, senha, nome) VALUES('$username', '$senha', '$nomecompleto')";
-        $novo_cadastro = $conection->query($sql);
+        $nomecompleto = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
+        $username = md5(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING));
+        $senha = md5(filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING));
+        $sql = "INSERT INTO users(nome_de_usuario, senha, nome) VALUES(:username, :senha, :nomecompleto)";
+        $insert_data = $conection->prepare($sql);
+        $insert_data->bindValue(':username', $username);
+        $insert_data->bindValue(':senha', $senha);
+        $insert_data->bindValue(':nomecompleto', $nomecompleto);
+        $insert_data->execute();
         CheckFile($_FILES['myfile']);
     };
 

@@ -11,17 +11,27 @@
         <tbody>";
             $query = 'SELECT * FROM cliente';
             if (isset($_GET['consulta_nome']) && $_GET['consulta_nome']!= '') {
-                $query .= " where nome like '%$_GET[consulta_nome]%'";
+                $nome = '%' . $_GET['consulta_nome'] . '%';
+                $query .= " where nome like :nome";
+                $result = $conection->prepare($query);
+                $result->bindParam(':nome', $nome);
+                $result->execute();
             } elseif (isset($_GET['consulta_id']) && $_GET['consulta_id']!= '') {
-                $query .= " where id = $_GET[consulta_id]";
-            };
+                $id = $_GET['consulta_id'];
+                $query .= " where id = :id";
+                $result = $conection->prepare($query);
+                $result->bindParam(':id', $id);
+                $result->execute();
+            } else{
+                $result = $conection->prepare($query);
+                $result->execute();
+            };            
             
-            $result = $conection->query($query);
             foreach ($result as $key => $value) {
                 echo "<tr>
                 <th class=\"col-\" scope=\"row\"><a href=\"details.php?cod=$value[id]\">$value[id]</a></th>
                 <td class=\"col-1\" scope=\"col-\"><a href=\"details.php?cod=$value[id]\">$value[nome]</a></td>
-                <td class=\"col-\" scope=\"col-\"><a href=\"exclude.php?cod=$value[id]\"><i class=\"fas fa-trash-alt\"></i></a></</td>
+                <td class=\"col-\" scope=\"col-\"><a href=\"exclude.php?del=$value[id]\"><i class=\"fas fa-trash-alt\"></i></a></</td>
                 </tr>";
             };
         echo"</tbody>

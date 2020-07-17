@@ -6,10 +6,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="icon" href="https://phproberto.gallerycdn.vsassets.io/extensions/phproberto/vscode-php-getters-setters/1.2.3/1525759974843/Microsoft.VisualStudio.Services.Icons.Default" type="image/gif" sizes="16x16">
         <link rel="stylesheet" href="crud.css">
         <title>CRUD</title>
@@ -72,12 +71,12 @@
                 <form id="cadastra_clientes_form" action="crud.php" method="post" enctype="multipart/form-data">
                     <div class="form-row form-group">
                         <div class="col-lg-6 col-12">
-                            <label for="cadastra_nome">Nome:</label>
+                            <label for="nome">Nome:</label>
                             <input type="text" name="nome" id="nome" class="form-control" required=""> 
                         </div>
                         <div class="col-lg-6 col-12">
                             <label for="sobre_nome">Sobrenome:</label>
-                            <input type="text" name="sobre_nome" id="sobre_nome" class="form-control" required="">
+                            <input type="text" name="sobrenome" id="sobrenome" class="form-control" required="">
                         </div>
                     </div>
                     <div class="form-row form-group">
@@ -97,7 +96,7 @@
                                 <legend>Endereço</legend>
                                 <div class="col-lg-1 col-12">
                                     <label for="logradouro:">Logradouro:</label>
-                                    <select class="custom-select" id="logradouro" name="logradouro[]" required="">
+                                    <select class="custom-select" id="logradouro" name="logradouro" required="">
                                         <option label="Rua" value="2">Rua</option>
                                         <option label="Avenida" value="3">Avenida</option>
                                         <option label="Alameda" value="4">Alameda</option>
@@ -108,29 +107,29 @@
                                 </div>
                                 <div class="col-lg-7 col-12">
                                     <label for="endereco:">Nome:</label>
-                                    <input type="text" name="endereco[]" id="endereco" class="form-control"  required="">
+                                    <input type="text" name="endereco" id="endereco" class="form-control"  required="">
                                 </div>
                                 <div class="col-lg-1 col-12">
                                     <label for="numero:">Número:</label>
-                                    <input type="number" name="numero[]"  min="0" id="numero" class="form-control" required="">
+                                    <input type="number" name="numero"  min="0" id="numero" class="form-control" required="">
                                 </div>
                                 <div class="col-lg-3 col-12">
                                     <label for="complemento:">Complemento:</label>
-                                    <input type="text" name="complemento[]" id="complemento" value="" class="form-control">
+                                    <input type="text" name="complemento" id="complemento" value="" class="form-control">
                                 </div>
                             </div>
                             <div class="form-row form-group">
                                 <div class="col-lg-5 col-12 ">
                                     <label for="bairro:">Bairro:</label>
-                                    <input type="text" name="bairro[]" id="bairro" class="form-control" required="">
+                                    <input type="text" name="bairro" id="bairro" class="form-control" required="">
                                 </div>
                                 <div class="col-lg-5 col-12 ">
                                     <label for="cidade:">Cidade:</label>
-                                    <input type="text" name="cidade[]" id="cidade" class="form-control" required="" >
+                                    <input type="text" name="cidade" id="cidade" class="form-control" required="" >
                                 </div>
                                 <div class="col-lg-2 col-12">
                                     <label for="estado:">Estado:</label>
-                                    <select class="custom-select" id="uf" name="estado[]" required="">
+                                    <select class="custom-select" id="uf" name="estado" required="">
                                         <option label="AC" value="1">AC</option>
                                         <option label="AL" value="2">AL</option>
                                         <option label="AP" value="3">AP</option>
@@ -162,8 +161,6 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <input type="button" value="+" id="add_endereco" title="Adicionar novo endereço." class="btn btn-sm btn-success">
-                        <input type="button" value="-" id="del_endereco" hidden="" title="Remover endereço." class="btn btn-sm btn-danger">
                         <fieldset id="contato">
                             <div class="form-row form-group">
                                 <legend>Contato</legend>
@@ -188,7 +185,7 @@
                             </div>
                                 <div class="col-lg-4 col-12">
                                     <label for="email">E-mail:</label>
-                                    <input type="email" name="email" id="email" class="form-control" required="">
+                                    <input type="email" name="email" id="email" class="form-control">
                                 </div>
                             </div>
                         </fieldset>

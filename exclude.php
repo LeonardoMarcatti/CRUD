@@ -1,8 +1,8 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
     session_start();
-    include_once('functions.php');
-    $cliente_id = $_GET['cod'];
+    $cliente_id = filter_input(INPUT_GET, 'del', FILTER_VALIDATE_INT);
+    include_once('functions.php');    
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +25,7 @@
             
             <div class=\"col- container-fluid\">
                 <form action=\"\" method=\"post\">
-                <input type=\"text\" name=\"delete_id\" id=\"delete_id\" value=\""; echo GetValue('id'); echo"\" hidden=\"\">
+                <input type=\"text\" name=\"delete_id\" id=\"delete_id\"  hidden=\"\" value=\""; echo GetValue('id'); echo"\">
                     <div class=\"form-row form-group\">
                         <div class=\"col-lg-1 col-3\">
                             <button type=\"submit\" id=\"sim\" class=\"btn btn-danger btn-block\">Sim</button>

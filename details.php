@@ -1,17 +1,16 @@
 <?php
     session_start();
     setlocale(LC_ALL, "pt_BR.utf-8");
-    $cod = $_GET['cod'];
+    $cod = filter_input(INPUT_GET, 'cod', FILTER_VALIDATE_INT);
     require_once('functions.php');
 ?>
 
 <!DOCTYPE html>
 <html lang="pt_BR">
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="icon" href="https://phproberto.gallerycdn.vsassets.io/extensions/phproberto/vscode-php-getters-setters/1.2.3/1525759974843/Microsoft.VisualStudio.Services.Icons.Default" type="image/gif" sizes="16x16">
         <link rel="stylesheet" href="crud.css"> 
         <title>CRUD - Detalhes</title>    
@@ -20,8 +19,7 @@
         <?php
             echo "<div id=\"barra\" class=\"col- container-fluid\"><a href=\"crud.php\" id=\"volta_crud\" b4>Voltar</a><a href=\"logout.php\" id=\"sair\">Sair</a></div>";
             if (isset($cod)) {
-                $query = "select * from v_tudo where id = $cod";
-                $result = $conection->query($query);
+                $result = getDetails($cod);
                 foreach ($result as $key => $value) {
                     if ($key == 0) {
                         echo "<h3 class=\"col- container-fluid\">$value[nome]</h3>
@@ -32,18 +30,18 @@
                         echo "<li>$value[tipo_logradouro] $value[logradouro] Nº $value[numero]  - $value[complemento] - $value[bairro] - $value[cidade] - $value[estado]</li>
                         <li>Email: $value[email]</li>
                         <li>Telefone: ($value[ddd]) $value[telefone]</li>
-                        <a href=\"update.php?codendereco=$value[id_endereco]&u_idcliente=$cod&u_id_ddd=$value[id_ddd]&u_id_telefone=$value[id_telefone]&u_id_email=$value[id_email]&u_tt=$value[tipo_telefone]\" id=\"alterar\">Alterar</a>";
+                        <a href=\"update.php?codendereco=$value[id_endereco]&id_cliente=$value[id]\" id=\"alterar\">Alterar</a>";
                     } else {
                         echo "<li>$value[tipo_logradouro] $value[logradouro] Nº $value[numero] - $value[bairro] - $value[cidade]  - $value[estado]</li>
                         <li>Email: $value[email]</li>
                         <li>Telefone: ($value[ddd]) $value[telefone]</li>
-                        <a href=\"update.php?codendereco=$value[id_endereco]&u_idcliente=$cod&u_id_ddd=$value[id_ddd]&u_id_telefone=$value[id_telefone]&u_id_email=$value[id_email]&u_tt=$value[tipo_telefone]\" id=\"alterar\">Alterar</a>";
+                        <a href=\"update.php?codendereco=$value[id_endereco]&id_cliente=$value[id]\" id=\"alterar\">Alterar</a>";
                     };                        
                     echo "</ol>";
                 };
                 echo "</ol>";
             } else {
-                header('location: login.php');
+                header('location: crud.php');
             };
             echo "<a href=\"addendereco.php?idcliente=$cod\" id=\"addendereco\"><input type=\"button\" value=\"Adicionar Endereço\" class=\"btn btn-success\"></a>";
         ?>

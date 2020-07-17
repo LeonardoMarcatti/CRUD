@@ -1,7 +1,7 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
     session_start();
-    $idcliente = $_GET['idcliente'];
+    $idcliente = filter_input(INPUT_GET, 'idcliente', FILTER_SANITIZE_STRING);
     include_once('functions.php');
 ?>
 
@@ -23,42 +23,42 @@
             <fieldset id="endereco_completo">
                 <div class="form-row form-group">
                     <legend>Endereço</legend>
-                <div class="col-lg-2 col-12">
-                    <label for="logradouro:">Logradouro:</label>
-                    <select class="custom-select" id="logradouro" name="logradouro[]" required="">
-                        <option label="Rua" value="2">Rua</option>
-                        <option label="Avenida" value="3">Avenida</option>
-                        <option label="Alameda" value="4">Alameda</option>
-                        <option label="Praça" value="5">Praça</option>
-                        <option label="Beco" value="1">Beco</option>
-                        <option label="Via" value="6">Via</option>
-                    </select>
-                </div>
+                    <div class="col-lg-2 col-12">
+                        <label for="logradouro:">Logradouro:</label>
+                        <select class="custom-select" id="logradouro" name="logradouro" required="">
+                            <option label="Rua" value="2">Rua</option>
+                            <option label="Avenida" value="3">Avenida</option>
+                            <option label="Alameda" value="4">Alameda</option>
+                            <option label="Praça" value="5">Praça</option>
+                            <option label="Beco" value="1">Beco</option>
+                            <option label="Via" value="6">Via</option>
+                        </select>
+                    </div>
                     <div class="col-lg-6 col-12">
                         <label for="endereco:">Nome:</label>
-                        <input type="text" name="endereco[]" id="endereco" class="form-control"  required="">
+                        <input type="text" name="endereco" id="endereco" class="form-control"  required="">
                     </div>
                     <div class="col-lg-1 col-12">
                         <label for="numero:">Número:</label>
-                        <input type="number" name="numero[]"  min="0" id="numero" class="form-control" required="">
+                        <input type="number" name="numero"  min="0" id="numero" class="form-control" required="">
                     </div>
                     <div class="col-lg-3 col-12">
                         <label for="complemento:">Complemento:</label>
-                        <input type="text" name="complemento[]" id="complemento" value="" class="form-control">
+                        <input type="text" name="complemento" id="complemento" value="" class="form-control">
                     </div>
                 </div>
                 <div class="form-row form-group">
                     <div class="col-lg-5 col-12">
                         <label for="bairro:">Bairro:</label>
-                        <input type="text" name="bairro[]" id="bairro" class="form-control" required="">
+                        <input type="text" name="bairro" id="bairro" class="form-control" required="">
                     </div>
                     <div class="col-lg-5 col-12">
                         <label for="cidade:">Cidade:</label>
-                        <input type="text" name="cidade[]" id="cidade" class="form-control" required="" >
+                        <input type="text" name="cidade" id="cidade" class="form-control" required="" >
                     </div>
                     <div class="col-lg-2 col-12">
                         <label for="estado:">Estado:</label>
-                        <select class="custom-select" id="uf" name="estado[]" required="">
+                        <select class="custom-select" id="uf" name="estado" required="">
                             <option label="AC" value="1">AC</option>
                             <option label="AL" value="2">AL</option>
                             <option label="AP" value="3">AP</option>
