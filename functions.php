@@ -93,7 +93,7 @@
             $sex = filter_input(INPUT_POST, 'sex', FILTER_SANITIZE_STRING);
             $fullname = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING) . ' ' . filter_input(INPUT_POST, 'sobrenome', FILTER_SANITIZE_STRING);            
             insertCliente($fullname, $sex);
-            $id_novo_cliente = $conection->query("select max(id) as 'id' from cliente")->fetch()['id'];
+            $id_novo_cliente = $conection->query("select max(id) as 'id' from cliente")->fetch(PDO::FETCH_ASSOC)['id'];
             $id_endereco = checkEndereco($logradouro, $numero, $endereco, $complemento, CheckBairro($bairro), CheckCidade($cidade), $estado);
 
             if ($id_endereco) {
@@ -188,7 +188,7 @@
         $alt->bindParam(':current_user', $current_user);
         $alt->execute();
         if ($alt) {
-            return $alt->fetch()['nome'];
+            return $alt->fetch(PDO::FETCH_ASSOC)['nome'];
         } else {
             return false;
         };        
@@ -214,8 +214,6 @@
     function GetValue($value){
         global $conection, $cliente_id, $cod_endereco;
         
-       
-
         if ($cliente_id != '') {
             $sql = "select * from v_tudo where id = :value";
             $result = $conection->prepare($sql);
@@ -227,7 +225,7 @@
         };
 
         $result->execute(); 
-        $row = $result->fetch()[$value];
+        $row = $result->fetch(PDO::FETCH_ASSOC)[$value];
         return $row;
     };
 
@@ -237,7 +235,7 @@
         $checked_bairro = $conection->prepare($sql);
         $checked_bairro->bindParam(':valor', $valor);
         $checked_bairro->execute();
-        $id = $checked_bairro->fetch()['id'];
+        $id = $checked_bairro->fetch(PDO::FETCH_ASSOC)['id'];
 
         if (is_numeric($id)) {
             return $id;
@@ -260,7 +258,7 @@
         $checked_cidade = $conection->prepare($sql);
         $checked_cidade->bindParam(':valor', $valor);
         $checked_cidade->execute();
-        $id = $checked_cidade->fetch()['id'];
+        $id = $checked_cidade->fetch(PDO::FETCH_ASSOC)['id'];
 
         if (is_numeric($id)) {
             return $id;
@@ -289,7 +287,7 @@
         $result->bindParam(':cidade', $ci);
         $result->bindParam(':estado', $e);
         $result->execute();
-        $id = $result->fetch()['id'];
+        $id = $result->fetch(PDO::FETCH_ASSOC)['id'];
         if ($id) {
             return $id;
         } else {
@@ -332,7 +330,7 @@
         $result = $conection->prepare($sql);
         $result->bindParam(':val', $val);
         $result->execute();
-        $id = $result->fetch()['id'];
+        $id = $result->fetch(PDO::FETCH_ASSOC)['id'];
         return $id;
     };
 
@@ -343,7 +341,7 @@
         $result->bindParam(':endereco', $endereco);
         $result->bindParam(':id', $id_cliente);
         $result->execute();
-        $endereco = $result->fetch()['endereco'];
+        $endereco = $result->fetch(PDO::FETCH_ASSOC)['endereco'];
         return $endereco;
     };
 
@@ -403,7 +401,7 @@
             $checked->bindParam(':ddd', $cheked_ddd);
             $checked->bindParam(':tipo', $tipo);
             $checked->execute();
-            $id = $checked->fetch()['id'];
+            $id = $checked->fetch(PDO::FETCH_ASSOC)['id'];
             if ($id) {
                 return $id;
             } else {
@@ -428,7 +426,7 @@
         $checked_ddd = $conection->prepare($sql);
         $checked_ddd->bindParam(':ddd', $val);
         $checked_ddd->execute();
-        $result = $checked_ddd->fetch()['id'];
+        $result = $checked_ddd->fetch(PDO::FETCH_ASSOC)['id'];
         if ($result) {
             return $result;
         } else {
