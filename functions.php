@@ -444,7 +444,6 @@
         $insert->execute();
     };
 
-
     function excludeCliente($id){
         global $conection;
         $sql = "delete from cliente where id = :id";

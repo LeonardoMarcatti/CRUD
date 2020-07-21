@@ -1,5 +1,5 @@
 <?php
-    include_once('functions.php');
+    include_once 'functions.php';
     
     echo "<table class=\"table table-bordered table-striped table-hover text-center col-lg-6 offset-lg-3 col-sm-12\">
         <thead class=\"thead-dark\">
@@ -10,13 +10,13 @@
         </thead>
         <tbody>";
             $query = 'SELECT * FROM cliente';
-            if (isset($_GET['consulta_nome']) && $_GET['consulta_nome']!= '') {
+            if ($_GET['consulta_nome']!= '') {
                 $nome = '%' . $_GET['consulta_nome'] . '%';
                 $query .= " where nome like :nome";
                 $result = $conection->prepare($query);
                 $result->bindParam(':nome', $nome);
                 $result->execute();
-            } elseif (isset($_GET['consulta_id']) && $_GET['consulta_id']!= '') {
+            } elseif ($_GET['consulta_id']!= '') {
                 $id = $_GET['consulta_id'];
                 $query .= " where id = :id";
                 $result = $conection->prepare($query);
