@@ -30,12 +30,12 @@
                         echo "<li>$value[tipo_logradouro] $value[logradouro] Nº $value[numero]  - $value[complemento] - $value[bairro] - $value[cidade] - $value[estado]</li>
                         <li>Email: $value[email]</li>
                         <li>Telefone: ($value[ddd]) $value[telefone]</li>
-                        <a href=\"update.php?codendereco=$value[id_endereco]&id_cliente=$value[id]\" id=\"alterar\">Alterar</a>";
+                        <a href=\"update.php?idendereco=$value[id_endereco]&idcliente=$value[id]&idtel=$value[id_telefone]&idemail=$value[id_email]\" id=\"alterar\">Alterar</a>";
                     } else {
                         echo "<li>$value[tipo_logradouro] $value[logradouro] Nº $value[numero] - $value[bairro] - $value[cidade]  - $value[estado]</li>
                         <li>Email: $value[email]</li>
                         <li>Telefone: ($value[ddd]) $value[telefone]</li>
-                        <a href=\"update.php?codendereco=$value[id_endereco]&id_cliente=$value[id]\" id=\"alterar\">Alterar</a>";
+                        <a href=\"update.php?idendereco=$value[id_endereco]&idcliente=$value[id]&idtel=$value[id_telefone]&idemail=$value[id_email]\" id=\"alterar\">Alterar</a>";
                     };                        
                     echo "</ol>";
                 };

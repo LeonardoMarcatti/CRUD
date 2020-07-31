@@ -1,7 +1,7 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
     session_start();
-    $cliente_id = filter_input(INPUT_GET, 'del', FILTER_VALIDATE_INT);
+    $del_id = filter_input(INPUT_GET, 'del', FILTER_VALIDATE_INT);
     include_once('functions.php');    
 ?>
 

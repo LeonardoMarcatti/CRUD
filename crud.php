@@ -2,6 +2,17 @@
     setlocale(LC_ALL, "pt_BR.utf-8");
     session_start();
     include_once('functions.php');
+    include_once('classes/endereco.php');
+    include_once('classes/telefone.php');
+    include_once('classes/clientes.php');
+    include_once('classes/email.php');
+
+    $tipo_log = new TipoLogradouroDAO($conection);
+    $tipo = $tipo_log->getAll();
+
+    $estados = new EstadoDAO($conection);
+    $lista_estados = $estados->getAll();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -97,12 +108,11 @@
                                 <div class="col-lg-1 col-12">
                                     <label for="logradouro:">Logradouro:</label>
                                     <select class="custom-select" id="logradouro" name="logradouro" required="">
-                                        <option label="Rua" value="2">Rua</option>
-                                        <option label="Avenida" value="3">Avenida</option>
-                                        <option label="Alameda" value="4">Alameda</option>
-                                        <option label="Praça" value="5">Praça</option>
-                                        <option label="Beco" value="1">Beco</option>
-                                        <option label="Via" value="6">Via</option>
+                                        <?php
+                                            foreach ($tipo as $key => $value) {
+                                                echo "<option value=\"" . $value->getID() . "\">" . $value->getNome() . "</option>";
+                                            };
+                                        ?>
                                     </select>
                                 </div>
                                 <div class="col-lg-7 col-12">
@@ -130,33 +140,11 @@
                                 <div class="col-lg-2 col-12">
                                     <label for="estado:">Estado:</label>
                                     <select class="custom-select" id="uf" name="estado" required="">
-                                        <option label="AC" value="1">AC</option>
-                                        <option label="AL" value="2">AL</option>
-                                        <option label="AP" value="3">AP</option>
-                                        <option label="AM" value="4">AM</option>
-                                        <option label="BA" value="5">BA</option>
-                                        <option label="CE" value="6">CE</option>
-                                        <option label="DF" value="7">DF</option>
-                                        <option label="ES" value="8">ES</option>
-                                        <option label="GO" value="9">GO</option>
-                                        <option label="MA" value="10">MA</option>
-                                        <option label="MT" value="11">MT</option>
-                                        <option label="MS" value="12">MS</option>
-                                        <option label="MG" value="13">MG</option>
-                                        <option label="PA" value="14">PA</option>
-                                        <option label="PB" value="15">PB</option>
-                                        <option label="PR" value="16">PR</option>
-                                        <option label="PE" value="17">PE</option>
-                                        <option label="PI" value="18">PI</option>
-                                        <option label="RJ" value="19">RJ</option>
-                                        <option label="RN" value="20">RN</option>
-                                        <option label="RS" value="21">RS</option>
-                                        <option label="RO" value="22">RO</option>
-                                        <option label="RR" value="23">RR</option>
-                                        <option label="SC" value="24">SC</option>
-                                        <option label="SP" value="25">SP</option>
-                                        <option label="SE" value="26">SE</option>
-                                        <option label="TO" value="27">TO</option>
+                                        <?php
+                                            foreach ($lista_estados as $key => $value) {
+                                                echo "<option label=\"" . $value->getNome() . "\" value=\"" . $value->getID() . "\">" . $value->getNome() . "</option>";
+                                            };
+                                        ?>
                                     </select>
                                 </div>
                             </div>

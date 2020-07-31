@@ -9,8 +9,8 @@
         $result->bindValue(':user', $user);
         $result->bindValue(':password', $password);
         $result->execute();
-        $result->fetch(pdo::FETCH_ASSOC)['id'];
-        if ($result) {
+        $id = $result->fetch()['id'];
+        if ($id) {
             $_SESSION['user'] = $user;
             header('location: crud.php');
             exit;

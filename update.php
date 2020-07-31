@@ -1,14 +1,24 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
     session_start();
-    if (!isset($_GET['codendereco'])) {
+
+    if (!isset($_GET['idendereco'])) {
         header('location: login.php');
         exit;
     };
-    $cod_endereco = filter_input(INPUT_GET, 'codendereco', FILTER_SANITIZE_STRING);
-    $id_cliente = filter_input(INPUT_GET, 'id_cliente', FILTER_SANITIZE_STRING);
-    include('functions.php');
-   
+    include_once 'functions.php';
+    include_once 'classes/telefone.php';
+
+    $tipos_telefone = new TipoTelefoneDAO($conection);
+    $lista_tipos = $tipos_telefone->getAll();
+
+    $tipo_log = new TipoLogradouroDAO($conection);
+    $lista_log = $tipo_log->getAll();
+
+    $estados = new EstadoDAO($conection);
+    $lista_estados = $estados->getAll();
+
+    $cliente_telefone_dao = new ClienteTelefoneDAO($conection);
 ?>
 <!DOCTYPE html>
 <html lang="pt_BR">
@@ -23,19 +33,19 @@
     <body>
         <?php
             echo "<div id=\"barra\" class=\"col- container-fluid\"><a href=\"crud.php\" id=\"volta_crud\" b4>Voltar</a><a href=\"logout.php\" id=\"sair\">Sair</a></div> <div class=\"container-fluid\" id=\"update\">
-                    <form action=\"\" method=\"post\">
+                    <form action=\"\" method=\"post\" enctype=\"multipart/form-data\">
                     <fieldset id=\"endereco_completo\">
                         <div class=\"form-row form-group\">
                             <legend>Endereço</legend>
                             <div class=\"col-lg-1 col-12\">
                                 <label for=\"logradouro:\">Logradouro:</label>
                                 <select class=\"custom-select\" id=\"logradouro\" name=\"logradouro\" required=\"\">";
-                                    foreach (listaTipoLogradouros() as $key => $value){
+                                    foreach ($lista_log as $key => $value){
                                         $id_meu_logradouro = GetValue('id_logradouro');
-                                        if ($id_meu_logradouro == $value['id']) {
-                                            echo "<option value=\"$value[id]\" selected=\"\">$value[nome]</option>";
+                                        if ($id_meu_logradouro == $value->getID()) {
+                                            echo "<option value=\"" . $value->getID() . "\" selected=\"\">" . $value->getNome() . "</option>";
                                         } else {
-                                            echo "<option value=\"$value[id]\">$value[nome]</option>";
+                                            echo "<option value=\"" . $value->getID() . "\">" . $value->getNome() . "</option>";
                                         };
                                     };
                                 echo "</select>
@@ -65,12 +75,12 @@
                             <div class=\"col-lg-2 col-12\">
                                 <label for=\"estado:\">Estado:</label>
                                 <select class=\"custom-select\" id=\"estado\" name=\"estado\" required=\"\">";
-                                foreach (getEstados() as $key => $value) {
+                                foreach ($lista_estados as $key => $value) {
                                     $estado_selecionado = GetValue('estado');
-                                    if ($value['nome'] == $estado_selecionado) {
-                                        echo "<option value=\"$value[id]\" selected=\"\">$value[nome]</option>";
+                                    if ($value->getNome() == $estado_selecionado) {
+                                        echo "<option value=\"" . $value->getID() . "\" selected=\"\">" . $value->getNome() . "</option>";
                                     } else {
-                                        echo "<option value=\"$value[id]\">$value[nome]</option>";
+                                        echo "<option value=\"" . $value->getID() . "\">" . $value->getNome() . "</option>";
                                     };
                                 };
                                 echo "</select>
@@ -94,12 +104,11 @@
                             <label for=\"tipo_telefone:\">Tipo:</label>
                             <select class=\"custom-select\" id=\"tipo_telefone\" name=\"tipo_telefone\" required=\"\">";
                             $tipo_telefone = GetValue('tipo_telefone');
-                            
-                            foreach (listaTipoTelefones() as $key => $value) {
+                            foreach ($lista_tipos as $key => $value) {
                                 if ($value['id'] == $tipo_telefone) {
-                                    echo "<option value=\"$value[id]\" selected=\"\">$value[tipo]</option>";
+                                    echo "<option value=\"" . $value['id'] . "\" selected=\"\">" . $value['tipo'] . "</option>";
                                 } else {
-                                    echo "<option value=\"$value[id]\">$value[tipo]</option>";
+                                    echo "<option value=\"" . $value['id'] . "\">" . $value['tipo'] . "</option>";
                                 };
                             };
                             echo "
