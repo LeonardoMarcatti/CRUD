@@ -42,6 +42,7 @@
                 echo "</ol>";
             } else {
                 header('location: crud.php');
+                exit;
             };
             echo "<a href=\"addendereco.php?idcliente=$cod\" id=\"addendereco\"><input type=\"button\" value=\"Adicionar Endereço\" class=\"btn btn-success\"></a>";
         ?>

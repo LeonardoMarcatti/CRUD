@@ -12,8 +12,8 @@
 
     $estados = new EstadoDAO($conection);
     $lista_estados = $estados->getAll();
-
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
