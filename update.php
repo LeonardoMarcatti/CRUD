@@ -6,6 +6,7 @@
         header('location: login.php');
         exit;
     };
+    
     include_once 'functions.php';
     include_once 'classes/telefone.php';
 
