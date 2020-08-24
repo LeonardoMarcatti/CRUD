@@ -194,6 +194,7 @@
     };
 
     class Endereco{
+        
         private int $id;
         private int $tipo;
         private string $endereco;
