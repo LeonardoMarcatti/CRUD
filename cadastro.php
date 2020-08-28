@@ -1,13 +1,12 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
     require_once 'conection.php';
-    $novo_cadastro = '';
 
     //Função para novo cadastro.
     if (isset($_POST['nome']) && isset($_POST['username']) && isset($_POST['senha'])) {
         $nomecompleto = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
-        $username = md5(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING));
-        $senha = md5(filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING));
+        $username = password_hash(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING), PASSWORD_BCRYPT);
+        $senha = password_hash(filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING), PASSWORD_BCRYPT);
         $sql = "INSERT INTO users(nome_de_usuario, senha, nome) VALUES(:username, :senha, :nomecompleto)";
         $insert_data = $conection->prepare($sql);
         $insert_data->bindValue(':username', $username);
@@ -15,6 +14,7 @@
         $insert_data->bindValue(':nomecompleto', $nomecompleto);
         $insert_data->execute();
         CheckFile($_FILES['myfile']);
+        echo "<p id=\"mensagem\">Cadastro efetuado com sucesso!</p>";
     };
 
     function CheckFile($val1){
@@ -44,14 +44,16 @@
         $name =  GeraCodigo() . '_' . $file['name'];
         if (move_uploaded_file($tmp, "$local" . "$name")) {
             $max = $conection->query("select max(id) as 'id' from users")->fetch()['id'];
-            $sql = "insert into image(caminho, iduser) values('$name', $max)";
-            $conection->query($sql);
+            $sql = "insert into image(caminho, iduser) values(:name, :max)";
+            $insert = $conection->prepare($sql);
+            $insert->bindParam(':name', $name);
+            $insert->bindParam(':max', $max);
+            $insert->execute();
         } else{
             echo "Erro";
         };
     };
 ?>
-
 <!DOCTYPE html>
 <html lang="pt_BR">
     <head>
@@ -66,7 +68,7 @@
     <body id="fundo">
         <?php
             echo "<div class=\"container-fluid\">
-            <form action=\"cadastro.php\" method=\"post\" class=\"col-lg-4 offset-lg-4 col-10 offset-1\" id=\"form\" enctype=\"multipart/form-data\">
+            <form action=\"\" method=\"post\" class=\"col-lg-4 offset-lg-4 col-10 offset-1\" id=\"form\" enctype=\"multipart/form-data\">
                 <div class=\"form-row\">
                     <div class=\"form-group col-lg-12 col-12\">
                         <label for=\"nome\">Nome Completo:</label>
@@ -95,16 +97,11 @@
                     <div class=\"form-group\">
                         <input type=\"submit\" value=\"Cadastre-se\" class=\"btn btn-success\" id=\"btn_cadastre_user\">
                     </div>
-                </div>";
-                if ($novo_cadastro != '') {
-                    echo "<p id=\"mensagem_cadastro\" class=\"text-center\">Cadastro efetuado com sucesso!</p>";
-                };            
-
-                echo "<p class=\"text-right\">Faça seu <a href=\"login.php\">login</a></p>
+                </div>                
+                <p class=\"text-right\">Faça seu <a href=\"login.php\">login</a></p>
             </form>
         </div>";
-        ?>
-
+        ?>        
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

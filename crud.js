@@ -13,8 +13,10 @@ $('#repete_senha').on('blur',
             alert('As senhas não conferem!');
             $('#repete_senha').val("");
             $('#senha').val("");
-        }
+        };
     }
 );
 
-  setTimeout(()=> $('#mensagem_cadastro').hide(1000), 3000);
+setTimeout(() => {
+   $('#mensagem').fadeOut(500);
+}, 1000);

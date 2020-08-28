@@ -2,23 +2,19 @@
     require_once 'conection.php';
     session_start();
     if (isset($_POST['user']) && isset($_POST['password'])) {
-        $user = md5(filter_input(INPUT_POST, 'user', FILTER_SANITIZE_STRING));
-        $password = md5(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING));
-        $sql = "select id from users where nome_de_usuario = :user and senha = :password";
+        $user = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $sql = "select * from users";
         $result = $conection->prepare($sql);
-        $result->bindValue(':user', $user);
-        $result->bindValue(':password', $password);
         $result->execute();
-        $id = $result->fetch()['id'];
-        if ($id) {
-            $_SESSION['user'] = $user;
-            header('location: crud.php');
-            exit;
-        } else{
-            unset($user);
-            unset($password);
-            unset($_POST['user']);
-            unset($_POST['password']);
+        $all = $result->fetchAll();
+
+        foreach ($all as $key => $value) {
+            if (password_verify($user, $value['nome_de_usuario'])) {
+                $_SESSION['user'] = $value['nome_de_usuario'];
+                header('location: crud.php');
+                exit;
+            };
         };
     } 
 ?>
