@@ -41,8 +41,8 @@
                             <div class=\"col-lg-1 col-12\">
                                 <label for=\"logradouro:\">Logradouro:</label>
                                 <select class=\"custom-select\" id=\"logradouro\" name=\"logradouro\" required=\"\">";
+                                $id_meu_logradouro = GetValue('id_logradouro');
                                     foreach ($lista_log as $key => $value){
-                                        $id_meu_logradouro = GetValue('id_logradouro');
                                         if ($id_meu_logradouro == $value->getID()) {
                                             echo "<option value=\"" . $value->getID() . "\" selected=\"\">" . $value->getNome() . "</option>";
                                         } else {
