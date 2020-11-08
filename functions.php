@@ -209,7 +209,7 @@
         $result = $conection->prepare($query);
         $result->bindParam(':cod', $val);
         $result->execute();
-        return $result;
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     };
 
     function GetValue($value){
