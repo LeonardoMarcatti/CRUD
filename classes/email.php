@@ -41,6 +41,8 @@
             $result = $this->pdo->prepare($sql);
             $result->bindParam(':endereco', $e->getEndereco());
             $result->execute();
+            $id = $result->fetch()['id'];
+            return $id;
         }
 
         public function add(Email $e){
@@ -49,6 +51,7 @@
             $insert->bindParam(':endereco', $e->getEndereco());
             $insert->bindParam(':cliente_id', $e->getClienteID());
             $insert->execute();
+            $e->setID($this->pdo->lastInsertId());
         }
 
         public function update(Email $e){

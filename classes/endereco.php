@@ -302,8 +302,6 @@
             $result->bindParam(':cidade', $e->getCidade());
             $result->bindParam(':estado', $e->getEstado());
             $result->execute();
-            $id = $result->fetch()['id'];
-            return $id;
         }
 
 

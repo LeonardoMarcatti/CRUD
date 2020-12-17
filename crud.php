@@ -11,6 +11,10 @@
 
     $estados = new EstadoDAO($conection);
     $lista_estados = $estados->getAll();
+
+    $telefone = new TipoTelefoneDAO($conection);
+    $lista_tipos_telefone = $telefone->getAll();
+    //var_dump($lista_tipos_telefone);
 ?>
 
 <!DOCTYPE html>
@@ -164,10 +168,10 @@
                             <div class="col-lg-2 col-12">
                                 <label for="tipo_telefone:">Tipo:</label>
                                 <select class="custom-select" id="tipo_telefone" name="tipo_telefone" required="">
-                                    <option value="4">Celular </option>
-                                    <option value="2">Residencial</option>
-                                    <option value="3">Comercial</option>
-                                    <option value="1">Outro</option>
+                                    <?php 
+                                    foreach ($lista_tipos_telefone as $key => $value) { ?>
+                                        <option value="<?= $value['id']?>"> <?= $value['tipo']?> </option>;
+                                    <?php } ?>                                    
                                 </select>
                             </div>
                                 <div class="col-lg-4 col-12">

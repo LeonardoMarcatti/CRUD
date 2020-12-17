@@ -44,22 +44,31 @@
 
         $new_endereco = new Endereco();
         $new_endereco_dao = new EnderecoDAO($conection);
+
         $new_bairro = new Bairro();
         $new_bairro_dao = new BairroDAO($conection);
+
         $new_cidade = new Cidade();
         $new_cidade_dao = new CidadeDAO($conection);
+
         $new_endereco_clienteDAO = new EnderecoClienteDAO($conection);
         $new_endereco_cliente = new EnderecoCliente();
+
         $new_email = new Email();
         $new_email_dao = new EmailDAO($conection);
+
         $new_ddd_dao = new DDD_DAO($conection);
         $newddd = new DDD();
+
         $newtelefone = new Telefone();
+
         $new_telefone_dao = new TelefoneDAO($conection);
         $new_clientetelefone_dao = new ClienteTelefoneDAO($conection);
+
         $new_cliente_telefone = new ClienteTelefone();
 
         $id_bairro = $new_bairro_dao->checkBairro($bairro);
+        
         if ($id_bairro) {
             $new_endereco->setBairro($id_bairro);
         } else {
@@ -70,6 +79,7 @@
         };
         
         $id_cidade = $new_cidade_dao->checkCidade($cidade);
+
         if ($id_cidade) {
             $new_endereco->setCidade($id_cidade);
         } else {            
@@ -84,6 +94,7 @@
         $new_endereco->setnumero($numero);
         $new_endereco->setComplemento($complemento);
         $new_endereco->setEstado($estado);
+
         $id_endereco = $new_endereco_dao->checkEndereco($new_endereco); #Cheque de existencia de endereço
 
         if (!$id_endereco) {
@@ -93,7 +104,8 @@
 
         $new_endereco_cliente->setIDEndereco($id_endereco);
 
-        if($email){
+        $id_email = '';
+        if($email != ''){
             $new_email->setEndereco($email);
             $id_email = $new_email_dao->checkEmail($new_email);
         };
@@ -171,6 +183,7 @@
             };
             header('location: crud.php');
             exit;
+            
         };
     }; 
 
@@ -215,7 +228,7 @@
     function GetValue($value){
         global $conection, $idcliente, $idendereco_atual, $del_id;
         
-        if (!$idcliente) {
+        if ($idcliente) {
             $sql = "select * from v_tudo where id = :value";
             $result = $conection->prepare($sql);
             $result->bindParam(':value', $idcliente);

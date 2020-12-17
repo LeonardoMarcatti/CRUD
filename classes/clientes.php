@@ -64,7 +64,6 @@
             $insert->execute();
 
             $c->setID($this->pdo->lastInsertId());
-            return $c;
         }
 
         public function getSexID($sex){
@@ -81,6 +80,14 @@
             $delete = $this->pdo->prepare($sql);
             $delete->bindParam(':id', $c->getID());
             $delete->execute();
+        }
+
+        public function getMaxId(){
+            $sql = "select max(id) as 'id' from cliente";
+            $result = $this->pdo->prepare($sql);
+            $result->execute();
+            $id = $result->fetch()['id'];
+            return $id;
         }
     }
 ?>
