@@ -209,13 +209,13 @@
         $result = $conection->prepare($query);
         $result->bindParam(':cod', $val);
         $result->execute();
-        return $result;
+        return $result->fetchAll(PDO::FETCH_ASSOC);
     };
 
     function GetValue($value){
         global $conection, $idcliente, $idendereco_atual, $del_id;
         
-        if ($idcliente && !$idcliente) {
+        if (!$idcliente) {
             $sql = "select * from v_tudo where id = :value";
             $result = $conection->prepare($sql);
             $result->bindParam(':value', $idcliente);

@@ -1,4 +1,3 @@
-drop database CRUD;
 CREATE DATABASE CRUD;
 use CRUD;
 create table users(
@@ -23,7 +22,8 @@ CREATE TABLE sexo(
 CREATE TABLE cliente (
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(30) NOT NULL,
-    sexo INT UNSIGNED NOT NULL
+    sexo INT UNSIGNED NOT NULL,
+    constraint cliente_sexo foreign key(sexo) references sexo(id)
 );
 
 CREATE TABLE tipo_telefone(

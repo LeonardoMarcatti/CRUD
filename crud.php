@@ -1,6 +1,5 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
-    session_start();
     include_once('functions.php');
     include_once('classes/endereco.php');
     include_once('classes/telefone.php');

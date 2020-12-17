@@ -9,7 +9,7 @@
             </tr>
         </thead>
         <tbody>";
-            $query = 'SELECT * FROM cliente';
+            $query = 'select * from cliente';
             if ($_GET['consulta_nome']!= '') {
                 $nome = '%' . $_GET['consulta_nome'] . '%';
                 $query .= " where nome like :nome";
