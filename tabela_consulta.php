@@ -10,13 +10,13 @@
         </thead>
         <tbody>";
             $query = 'select * from cliente';
-            if ($_GET['consulta_nome']!= '') {
+            if (!empty($_GET['consulta_nome'])) {
                 $nome = '%' . $_GET['consulta_nome'] . '%';
                 $query .= " where nome like :nome";
                 $result = $conection->prepare($query);
                 $result->bindParam(':nome', $nome);
                 $result->execute();
-            } elseif ($_GET['consulta_id']!= '') {
+            } elseif (!empty($_GET['consulta_id'])) {
                 $id = $_GET['consulta_id'];
                 $query .= " where id = :id";
                 $result = $conection->prepare($query);

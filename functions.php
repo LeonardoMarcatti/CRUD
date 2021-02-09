@@ -18,7 +18,7 @@
     $idemail_atual = filter_input(INPUT_GET, 'idemail', FILTER_SANITIZE_NUMBER_INT);
     $del_id = filter_input(INPUT_GET, 'del', FILTER_VALIDATE_INT);
 
-    if ($_POST['delete_id'] != '') {
+    if (!empty($_POST['delete_id'])) {
         $del = $_POST['delete_id'];
         $del_dao = new ClientesDAO($conection);
         $del_cliente = new Clientes();
@@ -28,7 +28,7 @@
         exit;
     };
 
-    if ($_POST['logradouro'] != '' && $_POST['endereco'] != '' && $_POST['numero'] != '' && $_POST['bairro'] != '' && $_POST['cidade'] != '' && $_POST['estado'] != '') {
+    if (!empty($_POST['logradouro']) && $_POST['endereco'] != '' && $_POST['numero'] != '' && $_POST['bairro'] != '' && $_POST['cidade'] != '' && $_POST['estado'] != '') {
 
         $logradouro = filter_input(INPUT_POST, 'logradouro', FILTER_SANITIZE_NUMBER_INT);
         $endereco = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_STRING);
@@ -177,6 +177,7 @@
             $new_endereco_clienteDAO->add($new_endereco_cliente);
             $new_cliente_telefone->setIDCliente($new_cliente->getID());
             $new_clientetelefone_dao->add($new_cliente_telefone);
+            
             if ($email) {
                 $new_email->setClienteID($new_cliente->getID());
                 $new_email_dao->add($new_email);
