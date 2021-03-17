@@ -14,7 +14,6 @@
 
     $telefone = new TipoTelefoneDAO($conection);
     $lista_tipos_telefone = $telefone->getAll();
-    //var_dump($lista_tipos_telefone);
 ?>
 
 <!DOCTYPE html>
