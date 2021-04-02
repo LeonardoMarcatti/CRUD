@@ -9,10 +9,11 @@
     
     include_once 'functions.php';
     include_once 'classes/telefone.php';
-    use classes\TipoTelefoneDAO;
-    use classes\TipoLogradouroDAO;
-    use classes\EstadoDAO;
-    use classes\ClienteTelefoneDAO;
+    
+    use CRUD\classes\TipoTelefoneDAO;
+    use CRUD\classes\TipoLogradouroDAO;
+    use CRUD\classes\EstadoDAO;
+    use CRUD\classes\ClienteTelefoneDAO;
 
     $tipos_telefone = new TipoTelefoneDAO($conection);
     $lista_tipos = $tipos_telefone->getAll();
@@ -25,6 +26,7 @@
 
     $cliente_telefone_dao = new ClienteTelefoneDAO($conection);
 ?>
+
 <!DOCTYPE html>
 <html lang="pt_BR">
     <head>

@@ -1,22 +1,22 @@
 <?php
-require_once 'conection.php';
-session_start();
-if (isset($_POST['user']) && isset($_POST['password'])) {
-    $user = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_STRING);
-    $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
-    $sql = "select * from users";
-    $result = $conection->prepare($sql);
-    $result->execute();
-    $all = $result->fetchAll();
+    require_once 'conection.php';
+    session_start();
+    if (isset($_POST['user']) && isset($_POST['password'])) {
+        $user = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $sql = "select * from users";
+        $result = $conection->prepare($sql);
+        $result->execute();
+        $all = $result->fetchAll();
 
-    foreach ($all as $key => $value) {
-        if (password_verify($user, $value['nome_de_usuario'])) {
-            $_SESSION['user'] = $value['nome_de_usuario'];
-            header('location: crud.php');
-            exit;
+        foreach ($all as $key => $value) {
+            if (password_verify($user, $value['nome_de_usuario'])) {
+                $_SESSION['user'] = $value['nome_de_usuario'];
+                header('location: crud.php');
+                exit;
+            };
         };
     };
-};
 ?>
 <!DOCTYPE html>
 <html lang="pt_BR">

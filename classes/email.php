@@ -1,6 +1,6 @@
 <?php
-    namespace classes;
-
+    namespace CRUD\classes;
+    
     class Email{
         private int $id;
         private string $endereco;

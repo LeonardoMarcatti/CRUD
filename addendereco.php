@@ -9,8 +9,8 @@
     include_once 'classes/endereco.php';
     include_once 'conection.php';
     
-    use classes\EstadoDAO;
-    use classes\TipoLogradouroDAO;
+    use CRUD\classes\EstadoDAO;
+    use CRUD\classes\TipoLogradouroDAO;
 
     $estados = new EstadoDAO($conection);
     $logradouros = new TipoLogradouroDAO($conection);

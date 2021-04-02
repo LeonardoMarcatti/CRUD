@@ -1,5 +1,6 @@
 <?php
-    namespace classes;
+
+    namespace CRUD\classes;
 
     class TipoLogradouro{
         private int $id;

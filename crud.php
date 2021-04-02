@@ -6,9 +6,9 @@
     include_once('classes/clientes.php');
     include_once('classes/email.php');
 
-    use classes\TipoLogradouroDAO;
-    use classes\EstadoDAO;
-    use classes\TipoTelefoneDAO;
+    use CRUD\classes\TipoLogradouroDAO;
+    use CRUD\classes\EstadoDAO;
+    use CRUD\classes\TipoTelefoneDAO;
 
     $tipo_log = new TipoLogradouroDAO($conection);
     $tipo = $tipo_log->getAll();

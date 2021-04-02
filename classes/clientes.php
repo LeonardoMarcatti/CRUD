@@ -1,5 +1,6 @@
 <?php
-    namespace classes;
+    namespace CRUD\classes;
+
     interface DAO{
         public function add(clientes $c);
         public function findAll();
