@@ -1,4 +1,5 @@
 <?php
+    namespace classes;
     interface DAO{
         public function add(clientes $c);
         public function findAll();
@@ -37,7 +38,7 @@
     class ClientesDAO implements DAO{
         private $pdo;
 
-        public function __construct(PDO $conection){
+        public function __construct(\PDO $conection){
             $this->pdo = $conection;
         }
 

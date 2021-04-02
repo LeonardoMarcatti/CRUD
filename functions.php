@@ -12,6 +12,26 @@
     include_once('classes/clientes.php');
     include_once('classes/email.php');
 
+    use classes\Email;
+    use classes\EmailDAO;
+    use classes\ClientesDAO;
+    use classes\ClienteTelefoneDAO;
+    use classes\Cidade;
+    use classes\CidadeDAO;
+    use classes\Clientes;
+    use classes\Endereco;
+    use classes\EnderecoDAO;
+    use classes\Bairro;
+    use classes\BairroDAO;
+    use classes\EnderecoCliente;
+    use classes\EnderecoClienteDAO;
+    use classes\DDD;
+    use classes\DDD_DAO;
+    use classes\Telefone;
+    use classes\TelefoneDAO;
+    use classes\ClienteTelefone;
+    
+
     $idendereco_atual = filter_input(INPUT_GET, 'idendereco', FILTER_SANITIZE_NUMBER_INT);
     $idcliente = filter_input(INPUT_GET, 'idcliente', FILTER_SANITIZE_NUMBER_INT);
     $id_tel_atual = filter_input(INPUT_GET, 'idtel', FILTER_SANITIZE_NUMBER_INT);

@@ -1,4 +1,6 @@
 <?php
+    namespace classes;
+
     class Email{
         private int $id;
         private string $endereco;
@@ -32,7 +34,7 @@
     class EmailDAO{
         private $pdo;
 
-        public function __construct(PDO $conection){
+        public function __construct(\PDO $conection){
             $this->pdo = $conection;
         }
 

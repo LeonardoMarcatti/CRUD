@@ -1,4 +1,6 @@
 <?php
+    namespace classes;
+
     class TipoLogradouro{
         private int $id;
         private string $nome;
@@ -23,7 +25,7 @@
     class TipoLogradouroDAO{
         private $pdo;
 
-        public function __construct(PDO $conection){
+        public function __construct(\PDO $conection){
             $this->pdo = $conection;
         }
 
@@ -66,7 +68,7 @@
     Class BairroDAO{
         private $pdo;
 
-        public function __construct(PDO $conection){
+        public function __construct(\PDO $conection){
             $this->pdo = $conection;
         }
 
@@ -129,7 +131,7 @@
     class CidadeDAO{
         private $pdo;
 
-        public function __construct(PDO $conection){
+        public function __construct(\PDO $conection){
             $this->pdo = $conection;
         }
 
@@ -174,7 +176,7 @@
     class EstadoDAO{
         private $pdo;
 
-        public function __construct(PDO $conection){
+        public function __construct(\PDO $conection){
             $this->pdo = $conection;
         }
 
@@ -272,7 +274,7 @@
     class EnderecoDAO{
         private $pdo;
 
-        public function __construct(PDO $conection){
+        public function __construct(\PDO $conection){
             $this->pdo = $conection;
         }
 
@@ -331,7 +333,7 @@
     class EnderecoClienteDAO{
         private $pdo;
 
-        public function __construct(PDO $conection){
+        public function __construct(\PDO $conection){
             $this->pdo = $conection;
         }
 

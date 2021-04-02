@@ -1,4 +1,6 @@
 <?php
+  namespace classes;
+
     class DDD{
       private $id;
       private $numero;
@@ -23,7 +25,7 @@
     class DDD_DAO{
       private $pdo;
 
-      public function __construct(PDO $conection){
+      public function __construct(\PDO $conection){
           $this->pdo = $conection;
       }
 
@@ -52,7 +54,7 @@
     class TipoTelefoneDAO{
       private $pdo;
 
-      public function __construct(PDO $conection){
+      public function __construct(\PDO $conection){
         $this->pdo = $conection;
       }
 
@@ -111,7 +113,7 @@
     class TelefoneDAO{
       private $pdo;
 
-      public function __construct(PDO $conection){
+      public function __construct(\PDO $conection){
           $this->pdo = $conection;
       }
 
@@ -176,7 +178,7 @@
     Class ClienteTelefoneDAO{
       private $pdo;
 
-      public function __construct(PDO $conection){
+      public function __construct(\PDO $conection){
           $this->pdo = $conection;
       }
 
