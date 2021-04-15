@@ -7,10 +7,10 @@
         $sql = "select * from users";
         $result = $conection->prepare($sql);
         $result->execute();
-        $all = $result->fetchAll();
+        $all = $result->fetchAll(\PDO::FETCH_ASSOC);
 
         foreach ($all as $key => $value) {
-            if (password_verify($user, $value['nome_de_usuario'])) {
+            if (password_verify($password, $value['senha'])) {
                 $_SESSION['user'] = $value['nome_de_usuario'];
                 header('location: crud.php');
                 exit;
