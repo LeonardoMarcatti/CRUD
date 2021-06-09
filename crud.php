@@ -25,22 +25,25 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
         <link rel="icon" href="https://phproberto.gallerycdn.vsassets.io/extensions/phproberto/vscode-php-getters-setters/1.2.3/1525759974843/Microsoft.VisualStudio.Services.Icons.Default" type="image/gif" sizes="16x16">
         <link rel="stylesheet" href="crud.css">
         <title>CRUD</title>
     </head>
     <body>
-        <?php
-            echo
-            "<div id=barra class=\"col-12 container-fluid\">
-                    <div class=\"row justify-content-between align-items-center\">
-                    <a href=#></a>
-                    <img title=\""; echo GetUserImageTitle();  echo "\" src=\"img/users/"; echo GetUserImage() . "\" >
-                        <a href=logout.php id=sair>Sair</a>
-                    </div>
-            </div>";
-        ?>
+        <div id=barra class="container-fluid">
+            <div class="row justify-content-evenly">
+                <div class="col">
+                    <a href=""></a>
+                </div>
+                <div class="col-lg-auto">
+                    <img id="user_image" title="<?php echo GetUserImageTitle()?>" src="img/users/<?php echo GetUserImage()?>">
+                </div>
+                <div class="col-lg">
+                    <a href=logout.php id=sair>Sair</a>
+                </div>
+            </div>
+        </div>
         <ul class="nav nav-tabs" id="abas" role="tab">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu_consulta">Consulta e Alteração</a>
@@ -58,35 +61,36 @@
         <div class="tab-content" id="todas_tabs">
                 <div class="tab-pane fade active show" id="consulta_clientes" role="tabpanel" aria-labelledby="consulta_clientes_tab">
                     <div class="container-fluid">
-                        <form id="consulta_clientes_form" name="consulta_clientes_form" method="get" action="crud.php" enctype="multipart/form-data">
-                            <div class="form-row form-group">
-                                <div class="col-lg-1 col-sm-12">
+                        <form id="consulta_clientes_form" name="consulta_clientes_form" method="get" action="crud.php">
+                            <div class="row g-3 justify-content-center">
+                                <div class="col-1">
                                     <label for="consulta_id">ID:</label>
                                     <input type="text" name="consulta_id" id="consulta_id" class="form-control">
                                 </div>
-                                <div class="col-lg-11 col-sm-12">
+                                <div class="col-5">
                                     <label for="consulta_nome">Nome:</label>
                                     <input type="text" name="consulta_nome" id="consulta_nome" class="form-control">
                                 </div>
+                                <div class="col-2 align-self-end">
+                                    <button type="submit" id="btn_consulta" class="btn btn-block btn-outline-success">Consultar</button>
+                                    <button type="reset" id="btn_reset_consulta"  class="btn btn-block btn-outline-warning">Limpar</button>
+                                </div>
                             </div>
-                            <div class="form-row form-group">
-                            <div class="col-lg-2 col-4">
-                                <button type="submit" id="btn_consulta" class="btn btn-block btn-success">Consultar</button>
-                            </div>
-                            <div class="col-lg-2 col-4">
-                                <button type="reset" id="btn_reset_consulta"  class="btn btn-block btn-warning">Limpar</button>
-                            </div>
-                        </div>
                         </form>
+                            <?php 
+                                if (isset($_SESSION['flash']) &&  $_SESSION['flash'] != '') { ?>
+                                    <h5 id="flash"><?=$_SESSION['flash'];?></h5>
+                                    <?php unset($_SESSION['flash']); 
+                                }; ?>
                             <?php
-                                include('tabela_consulta.php');
+                                include_once('tabela_consulta.php');
                             ?>
                     </div>
                 </div>
             <div class="tab-pane fade" id="cadastra_clientes" role="tabpanel" aria-labelledby="clientes-tab">
                 <div class="container-fluid">
                 <form id="cadastra_clientes_form" action="crud.php" method="post" enctype="multipart/form-data">
-                    <div class="form-row form-group">
+                    <div class="row">
                         <div class="col-lg-6 col-12">
                             <label for="nome">Nome:</label>
                             <input type="text" name="nome" id="nome" class="form-control" required=""> 
@@ -96,24 +100,24 @@
                             <input type="text" name="sobrenome" id="sobrenome" class="form-control" required="">
                         </div>
                     </div>
-                    <div class="form-row form-group">
+                    <div class="row">
                         <div class="col">
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="masculino" name="sex" class="custom-control-input" value="M" required="">
-                                <label class="custom-control-label" for="masculino">Masculino</label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="masculino" name="sex" class="form-check-input" value="M" required="">
+                                <label class="form-check-label" for="masculino">Masculino</label>
                             </div>
-                            <div class="custom-control custom-radio custom-control-inline">
-                                <input type="radio" id="feminino" name="sex" class="custom-control-input" value="F" required="">
-                                <label class="custom-control-label" for="feminino">Feminino</label>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" id="feminino" name="sex" class="form-check-input" value="F" required="">
+                                <label class="form-check-label" for="feminino">Feminino</label>
                             </div>
                         </div>
                     </div>
                         <fieldset id="endereco_completo">
-                            <div class="form-row form-group">
+                            <div class="row">
                                 <legend>Endereço</legend>
                                 <div class="col-lg-1 col-12">
                                     <label for="logradouro:">Logradouro:</label>
-                                    <select class="custom-select" id="logradouro" name="logradouro" required="">
+                                    <select class="form-select" id="logradouro" name="logradouro" required="">
                                         <?php
                                             foreach ($tipo as $key => $value) {
                                                 echo "<option value=\"" . $value->getID() . "\">" . $value->getNome() . "</option>";
@@ -134,7 +138,7 @@
                                     <input type="text" name="complemento" id="complemento" value="" class="form-control">
                                 </div>
                             </div>
-                            <div class="form-row form-group">
+                            <div class="row">
                                 <div class="col-lg-5 col-12 ">
                                     <label for="bairro:">Bairro:</label>
                                     <input type="text" name="bairro" id="bairro" class="form-control" required="">
@@ -145,7 +149,7 @@
                                 </div>
                                 <div class="col-lg-2 col-12">
                                     <label for="estado:">Estado:</label>
-                                    <select class="custom-select" id="uf" name="estado" required="">
+                                    <select class="form-select" id="uf" name="estado" required="">
                                         <?php
                                             foreach ($lista_estados as $key => $value) {
                                                 echo "<option label=\"" . $value->getNome() . "\" value=\"" . $value->getID() . "\">" . $value->getNome() . "</option>";
@@ -156,7 +160,7 @@
                             </div>
                         </fieldset>
                         <fieldset id="contato">
-                            <div class="form-row form-group">
+                            <div class="row form-group">
                                 <legend>Contato</legend>
                                 <div class="col-lg-1 col-3">
                                     <label for="ddd:">DDD:</label>
@@ -170,7 +174,7 @@
                             </div>
                             <div class="col-lg-2 col-12">
                                 <label for="tipo_telefone:">Tipo:</label>
-                                <select class="custom-select" id="tipo_telefone" name="tipo_telefone" required="">
+                                <select class="form-select" id="tipo_telefone" name="tipo_telefone" required="">
                                     <?php 
                                     foreach ($lista_tipos_telefone as $key => $value) { ?>
                                         <option value="<?= $value['id']?>"> <?= $value['tipo']?> </option>;
@@ -183,12 +187,12 @@
                                 </div>
                             </div>
                         </fieldset>
-                        <div class="form-row form-group">
-                            <div class="col-lg-2 col-5">
-                                <button type="submit" id="submit_clientes" class="btn btn-block btn-success">Adicionar</button>
+                        <div class="row float-end g-2">
+                            <div class="col">
+                                <button type="submit" id="submit_clientes" class="btn btn-outline-success">Adicionar</button>
                             </div>
-                            <div class="col-lg-2 col-5">
-                                <button type="reset" id="reset_cliente"  class="btn btn-block btn-warning">Limpar</button>
+                            <div class="col">
+                            <button type="reset" id="reset_cliente"  class="btn btn-outline-warning">Limpar</button>
                             </div>
                         </div>
                     </form>

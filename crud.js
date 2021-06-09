@@ -19,4 +19,5 @@ $('#repete_senha').on('blur',
 
 setTimeout(() => {
    $('#mensagem').fadeOut(500);
+   $('#flash').hide(500);
 }, 1000);

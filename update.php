@@ -1,6 +1,5 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
-    session_start();
 
     if (!isset($_GET['idendereco'])) {
         header('location: login.php');

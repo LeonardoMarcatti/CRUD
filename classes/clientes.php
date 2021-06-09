@@ -61,8 +61,8 @@
         public function add(Clientes $c){
             $sql = 'insert into cliente(nome, sexo) values(:nome, :sexo)';
             $insert = $this->pdo->prepare($sql);
-            $insert->bindParam(':nome', $c->getNome());
-            $insert->bindParam(':sexo', $c->getSexo());
+            $insert->bindValue(':nome', $c->getNome());
+            $insert->bindValue(':sexo', $c->getSexo());
             $insert->execute();
 
             $c->setID($this->pdo->lastInsertId());
@@ -71,7 +71,7 @@
         public function getSexID($sex){
             $sql = 'select id from sexo where genero = :genero';
             $result = $this->pdo->prepare($sql);
-            $result->bindParam(':genero', $sex);
+            $result->bindValue(':genero', $sex);
             $result->execute();
             $id = $result->fetch()['id'];
             return $id;
@@ -80,7 +80,7 @@
         public function delete(Clientes $c){
             $sql = 'delete from cliente_telefone where id_cliente = :id; delete from endereco_cliente where id_cliente = :id; delete from email where cliente_id = :id; delete from cliente where id = :id';
             $delete = $this->pdo->prepare($sql);
-            $delete->bindParam(':id', $c->getID());
+            $delete->bindValue(':id', $c->getID());
             $delete->execute();
         }
 

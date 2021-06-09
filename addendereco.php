@@ -1,11 +1,11 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
-    session_start();
+    include_once 'functions.php';
     if (!isset($_SESSION['user'])) {
         header('location: login.php');
         exit;
     };
-    include_once 'functions.php';
+    
     include_once 'classes/endereco.php';
     include_once 'conection.php';
     

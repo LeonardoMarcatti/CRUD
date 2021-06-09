@@ -128,6 +128,11 @@
         if($email != ''){
             $new_email->setEndereco($email);
             $id_email = $new_email_dao->checkEmail($new_email);
+            if ($id_email) {
+                $_SESSION['flash_details'] = 'Email em uso!'; 
+            };            
+            header('location: details.php?cod=' . $idcliente);
+            exit;
         };
         
         if ($ddd && $tel) {
@@ -199,12 +204,16 @@
             $new_clientetelefone_dao->add($new_cliente_telefone);
             
             if ($email) {
-                $new_email->setClienteID($new_cliente->getID());
-                $new_email_dao->add($new_email);
+                $new_email->setEndereco($email);
+                if ($new_email_dao->checkEmail($new_email)) {
+                    $_SESSION['flash'] = 'Email em uso'; 
+                } else {
+                    $new_email->setClienteID($new_cliente->getID());
+                    $new_email_dao->add($new_email);
+                };
+                header('location: crud.php');
+                exit;
             };
-            header('location: crud.php');
-            exit;
-            
         };
     }; 
 

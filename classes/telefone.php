@@ -33,18 +33,17 @@
       public function addDDD(DDD $d){
         $sql = 'insert into ddd(numero) values(:numero)';
         $insert = $this->pdo->prepare($sql);
-        $insert->bindParam(':numero', $d->getNumero());
+        $insert->bindValue(':numero', $d->getNumero());
         $insert->execute();
       }
 
       public function checkDDD(DDD $d){
         $sql = 'select id from ddd where numero = :numero';
         $result = $this->pdo->prepare($sql);
-        $result->bindParam(':numero', $d->getNumero());
+        $result->bindValue(':numero', $d->getNumero());
         $result->execute();
-        if ($result) {
-          $id = $result->fetch()['id'];
-          return $id;
+        if ($result->rowCount() > 0) {
+          return $result->fetch()['id'];
         } else {
           return false;
         };
@@ -121,20 +120,23 @@
       public function checkTelefone(Telefone $t){
         $sql = 'select id from telefone where numero = :numero and ddd = :ddd and tipo = :tipo';
         $result = $this->pdo->prepare($sql);
-        $result->bindParam(':numero', $t->getNumero());
-        $result->bindParam(':ddd', $t->getDDD());
-        $result->bindParam(':tipo', $t->getTipo());
+        $result->bindValue(':numero', $t->getNumero());
+        $result->bindValue(':ddd', $t->getDDD());
+        $result->bindValue(':tipo', $t->getTipo());
         $result->execute();
-        $id = $result->fetch()['id'];
-        return $id;
+        if ($result->rowCount() > 0) {
+          return $result->fetch()['id'];
+        } else {
+          return false;
+        };
       }
 
       public function add(Telefone $t){
         $sql = 'insert into telefone(numero, ddd, tipo) values(:numero, :ddd, :tipo)';
         $insert = $this->pdo->prepare($sql);
-        $insert->bindParam(':numero', $t->getNumero());
-        $insert->bindParam(':ddd', $t->getDDD());
-        $insert->bindParam(':tipo', $t->getTipo());
+        $insert->bindValue(':numero', $t->getNumero());
+        $insert->bindValue(':ddd', $t->getDDD());
+        $insert->bindValue(':tipo', $t->getTipo());
         $insert->execute();
       }
 
@@ -186,17 +188,17 @@
       public function add(ClienteTelefone $ct){
         $sql = "insert into cliente_telefone(id_cliente, id_telefone) values(:id_cliente, :id_telefone)";
         $insert = $this->pdo->prepare($sql);
-        $insert->bindParam(':id_cliente', $ct->getIDCliente());
-        $insert->bindParam(':id_telefone', $ct->getIDTelefone());
+        $insert->bindValue(':id_cliente', $ct->getIDCliente());
+        $insert->bindValue(':id_telefone', $ct->getIDTelefone());
         $insert->execute();
       }
 
       public function update(ClienteTelefone $ct, $tel_atual){
         $sql = "update cliente_telefone set id_telefone = :id_telefone where id_cliente = :id_cliente and id_telefone = :id_telefone_atual";
         $update = $this->pdo->prepare($sql);
-        $update->bindParam(':id_cliente', $ct->getIDCliente());
-        $update->bindParam(':id_telefone', $ct->getIDTelefone());
-        $update->bindParam(':id_telefone_atual', $tel_atual);
+        $update->bindValue(':id_cliente', $ct->getIDCliente());
+        $update->bindValue(':id_telefone', $ct->getIDTelefone());
+        $update->bindValue(':id_telefone_atual', $tel_atual);
         $update->execute();
       }
     };

@@ -66,42 +66,40 @@
         <title>CRUD - Cadastro</title>
     </head>
     <body id="fundo">
-        <?php
-            echo "<div class=\"container-fluid\">
-            <form action=\"\" method=\"post\" class=\"col-lg-4 offset-lg-4 col-10 offset-1\" id=\"form\" enctype=\"multipart/form-data\">
-                <div class=\"form-row\">
-                    <div class=\"form-group col-lg-12 col-12\">
-                        <label for=\"nome\">Nome Completo:</label>
-                        <input type=\"text\" name=\"nome\" id=\"nome\" required=\"\" class=\"form-control\">
+            <div class="container-fluid">
+            <form action="" method="post" class="col-lg-4 offset-lg-4 col-10 offset-1" id="form" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-lg-12 col-12">
+                        <label for="nome">Nome Completo:</label>
+                        <input type="text" name="nome" id="nome" required="" class="form-control">
                     </div>
-                    <div class=\"form-group col-lg-12 col-12\">
-                        <label for=\"username\">Username:</label>
-                        <input type=\"text\" name=\"username\" id=\"username\" required=\"\" class=\"form-control\">
+                    <div class="form-group col-lg-12 col-12">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" required="" class="form-control">
                     </div>
-                    <div class=\"form-group col-lg-12 col-12\">
-                        <label for=\"myfile\">Foto:</label>
-                        <input type=\"file\" class=\"form-control-file\" id=\"myfile\" name=\"myfile\">
-                    </div>
-                </div>
-                <div class=\"form-row\">
-                    <div class=\"form-group col-lg-12 col-12\">
-                        <label for=\"senha\">Senha:</label>
-                        <input type=\"password\" name=\"senha\" id=\"senha\" required=\"\" class=\"form-control\">
-                    </div>
-                    <div class=\"form-group col-lg-12 col-12\">
-                        <label for=\"senha\">Repita sua senha:</label>
-                        <input type=\"password\" name=\"repete_senha\" id=\"repete_senha\" required=\"\" class=\"form-control\">
+                    <div class="form-group col-lg-12 col-12">
+                        <label for="myfile">Foto:</label>
+                        <input type="file" class="form-control-file" id="myfile" name="myfile">
                     </div>
                 </div>
-                <div class=\"form-row\">
-                    <div class=\"form-group\">
-                        <input type=\"submit\" value=\"Cadastre-se\" class=\"btn btn-success\" id=\"btn_cadastre_user\">
+                <div class="form-row">
+                    <div class="form-group col-lg-12 col-12">
+                        <label for="senha">Senha:</label>
+                        <input type="password" name="senha" id="senha" required="" class="form-control">
+                    </div>
+                    <div class="form-group col-lg-12 col-12">
+                        <label for="senha">Repita sua senha:</label>
+                        <input type="password" name="repete_senha" id="repete_senha" required="" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <input type="submit" value="Cadastre-se" class="btn btn-success" id="btn_cadastre_user">
                     </div>
                 </div>                
-                <p class=\"text-right\">Faça seu <a href=\"login.php\">login</a></p>
+                <p class="text-right">Faça seu <a href="login.php">login</a></p>
             </form>
-        </div>";
-        ?>        
+        </div>     
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

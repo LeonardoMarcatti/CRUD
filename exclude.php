@@ -1,6 +1,5 @@
 <?php
     setlocale(LC_ALL, "pt_BR.utf-8");
-    session_start();
     $del_id = filter_input(INPUT_GET, 'del', FILTER_VALIDATE_INT);
     include_once('functions.php');    
 ?>

@@ -76,11 +76,10 @@
         public function checkBairro($bairro){
             $sql = 'select id from bairro where nome = :nome';
             $result = $this->pdo->prepare($sql);
-            $result->bindParam(':nome', $bairro);
+            $result->bindValue(':nome', $bairro);
             $result->execute();
-            $id = $result->fetch()['id'];
-            if ($id) {
-                return $id;
+            if ($result->rowCount() > 0) {
+                return $result->fetch(\PDO::FETCH_ASSOC)['id'];
             } else {
                 return false;
             };            
@@ -89,7 +88,7 @@
         public function add(Bairro $b){
             $sql = 'insert into bairro(nome) values(:nome)';
             $insert = $this->pdo->prepare($sql);
-            $insert->bindParam(':nome', $b->getNome());
+            $insert->bindValue(':nome', $b->getNome());
             $insert->execute();
         }
 
@@ -139,16 +138,19 @@
         public function checkCidade($nome){
             $sql = 'select id from cidade where nome = :nome';
             $result = $this->pdo->prepare($sql);
-            $result->bindParam(':nome', $nome);
+            $result->bindValue(':nome', $nome);
             $result->execute();
-            $id = $result->fetch()['id'];
-            return $id;            
+            if ($result->rowCount() > 0) {
+                return $result->fetch(\PDO::FETCH_ASSOC)['id'];
+            } else {
+                return false;
+            }; 
         }
 
         public function add(Cidade $c){
             $sql = 'insert into cidade(nome) values(:nome)';
             $insert = $this->pdo->prepare($sql);
-            $insert->bindParam(':nome', $c->getNome());
+            $insert->bindValue(':nome', $c->getNome());
             $insert->execute();
         }
     }
@@ -282,32 +284,33 @@
         public function checkEndereco(Endereco $e){
             $sql = 'select id from endereco where tipo_logradouro = :logradouro and nome_logradouro = :endereco and numero = :numero and complemento = :complemento and bairro = :bairro and cidade = :cidade and estado = :estado';
             $result = $this->pdo->prepare($sql);
-            $result->bindParam(':logradouro', $e->getTipo());
-            $result->bindParam(':endereco', $e->getEndereco());
-            $result->bindParam(':numero', $e->getnumero());
-            $result->bindParam(':complemento', $e->getComplemento());
-            $result->bindParam(':bairro', $e->getBairro());
-            $result->bindParam(':cidade', $e->getCidade());
-            $result->bindParam(':estado', $e->getEstado());
+            $result->bindValue(':logradouro', $e->getTipo());
+            $result->bindValue(':endereco', $e->getEndereco());
+            $result->bindValue(':numero', $e->getnumero());
+            $result->bindValue(':complemento', $e->getComplemento());
+            $result->bindValue(':bairro', $e->getBairro());
+            $result->bindValue(':cidade', $e->getCidade());
+            $result->bindValue(':estado', $e->getEstado());
             $result->execute();
-            $id = $result->fetch()['id'];
-            return $id;
+            if ($result->rowCount() > 0) {
+                return $result->fetch(\PDO::FETCH_ASSOC)['id'];
+            } else {
+                return false;
+            };  
         }
 
         public function add(Endereco $e){
             $sql = 'insert into endereco(tipo_logradouro, nome_logradouro, numero, complemento, bairro, cidade, estado) values(:logradouro, :endereco, :numero, :complemento, :bairro, :cidade, :estado)';
             $result = $this->pdo->prepare($sql);
-            $result->bindParam(':logradouro', $e->getTipo());
-            $result->bindParam(':endereco', $e->getEndereco());
-            $result->bindParam(':numero', $e->getnumero());
-            $result->bindParam(':complemento', $e->getComplemento());
-            $result->bindParam(':bairro', $e->getBairro());
-            $result->bindParam(':cidade', $e->getCidade());
-            $result->bindParam(':estado', $e->getEstado());
+            $result->bindValue(':logradouro', $e->getTipo());
+            $result->bindValue(':endereco', $e->getEndereco());
+            $result->bindValue(':numero', $e->getnumero());
+            $result->bindValue(':complemento', $e->getComplemento());
+            $result->bindValue(':bairro', $e->getBairro());
+            $result->bindValue(':cidade', $e->getCidade());
+            $result->bindValue(':estado', $e->getEstado());
             $result->execute();
         }
-
-
     };
 
     class EnderecoCliente{
@@ -341,16 +344,16 @@
         public function add(EnderecoCliente $ec){
             $sql = 'insert into endereco_cliente(id_cliente, id_endereco) values(:idcliente, :idendereco)';
             $insert = $this->pdo->prepare($sql);
-            $insert->bindParam(':idcliente', $ec->getIDCliente());
-            $insert->bindParam('idendereco', $ec->getIDEndereco());
+            $insert->bindValue(':idcliente', $ec->getIDCliente());
+            $insert->bindValue('idendereco', $ec->getIDEndereco());
             $insert->execute();
         }
 
         public function update(EnderecoCliente $ec, $id_endereco_atual){
             $sql = "update endereco_cliente set id_endereco = :id_endereco where id_cliente = :id_cliente and id_endereco = $id_endereco_atual";
             $update = $this->pdo->prepare($sql);
-            $update->bindParam(':id_cliente', $ec->getIDCliente());
-            $update->bindParam(':id_endereco',$ec->getIDEndereco());
+            $update->bindValue(':id_cliente', $ec->getIDCliente());
+            $update->bindValue(':id_endereco',$ec->getIDEndereco());
             $update->execute();
         }
     };

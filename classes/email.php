@@ -41,17 +41,20 @@
         public function checkEmail(Email $e){
             $sql = 'select id from email where endereco = :endereco';
             $result = $this->pdo->prepare($sql);
-            $result->bindParam(':endereco', $e->getEndereco());
+            $result->bindValue(':endereco', $e->getEndereco());
             $result->execute();
-            $id = $result->fetch()['id'];
-            return $id;
+            if ($result->rowCount() > 0) {
+                return $result->fetch()['id'];
+            } else {
+                return false;
+            };
         }
 
         public function add(Email $e){
             $sql = 'insert into email(endereco, cliente_id) values(:endereco, :cliente_id)';
             $insert = $this->pdo->prepare($sql);
-            $insert->bindParam(':endereco', $e->getEndereco());
-            $insert->bindParam(':cliente_id', $e->getClienteID());
+            $insert->bindValue(':endereco', $e->getEndereco());
+            $insert->bindValue(':cliente_id', $e->getClienteID());
             $insert->execute();
             $e->setID($this->pdo->lastInsertId());
         }
@@ -59,15 +62,15 @@
         public function update(Email $e){
             $sql = 'update email set endereco = :endereco where cliente_id = :id';
             $update = $this->pdo->prepare($sql);
-            $update->bindParam(':endereco', $e->getEndereco());
-            $update->bindParam(':id', $e->getClienteID());
+            $update->bindValue(':endereco', $e->getEndereco());
+            $update->bindValue(':id', $e->getClienteID());
             $update->execute();
         }
 
         public function delete($id){
             $sql = 'delete from email where id = :id';
             $delete = $this->pdo->prepare($sql);
-            $delete->bindParam(':id', $id);
+            $delete->bindValue(':id', $id);
             $delete->execute();
         }
     };
