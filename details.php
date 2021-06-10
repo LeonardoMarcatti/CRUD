@@ -26,7 +26,7 @@
                     };
                     if (isset($_SESSION['flash_details']) &&  $_SESSION['flash_details'] != '') { ?>
                         <h5 id="flash"><?=$_SESSION['flash_details'];?></h5>
-                        <?php unset($_SESSION['flash']); 
+                        <?php unset($_SESSION['flash_details']); 
                     };
                     echo "<ol class=\"shadow col-\">";
                     if ($value['complemento'] != '') {
