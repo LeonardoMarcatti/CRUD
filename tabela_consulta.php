@@ -1,5 +1,5 @@
 <?php
-    include_once 'functions.php';
+    //include_once 'functions.php';
     
     echo 
         " <div class=\"col-6 offset-3\"><table class=\"table table-bordered table-striped table-hover text-center\">
@@ -39,8 +39,7 @@
                 </tr>";
             };
 
-        echo
-        "</tbody>
+        ?>
+        </tbody>
     </table>
-    </div>";
-?>
+    </div>

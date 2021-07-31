@@ -48,7 +48,7 @@
         exit;
     };
 
-    if (!empty($_POST['logradouro']) && $_POST['endereco'] != '' && $_POST['numero'] != '' && $_POST['bairro'] != '' && $_POST['cidade'] != '' && $_POST['estado'] != '') {
+    if (isset($_POST['logradouro']) && $_POST['endereco'] != '' && $_POST['numero'] != '' && $_POST['bairro'] != '' && $_POST['cidade'] != '' && $_POST['estado'] != '') {
 
         $logradouro = filter_input(INPUT_POST, 'logradouro', FILTER_SANITIZE_NUMBER_INT);
         $endereco = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_STRING);
@@ -123,17 +123,6 @@
         };
 
         $new_endereco_cliente->setIDEndereco($id_endereco);
-
-        $id_email = '';
-        if($email != ''){
-            $new_email->setEndereco($email);
-            $id_email = $new_email_dao->checkEmail($new_email);
-            if ($id_email) {
-                $_SESSION['flash_details'] = 'Email em uso!'; 
-            };            
-            header('location: details.php?cod=' . $idcliente);
-            exit;
-        };
         
         if ($ddd && $tel) {
             $newddd->setNumero($ddd);
@@ -161,12 +150,14 @@
 
         if ($idcliente) {
             $new_endereco_cliente->setIDCliente($idcliente);
+            $new_email->setEndereco($email);
+            $new_email->setClienteID($idcliente);
+            $checked_email_id = $new_email_dao->checkEmail($new_email);
             if (!$email) {
                 $new_email_dao->delete($idemail_atual);
-            } elseif ($idemail_atual && !$id_email) {
-                $new_email->setClienteID($idcliente);
+            } elseif ($idemail_atual && !$checked_email_id) {
                 $new_email_dao->update($new_email);
-            } elseif (!$idemail_atual && !$id_email) {
+            } elseif (!$idemail_atual && !$checked_email_id) {
                 $new_email->setClienteID($idcliente);
                 $new_email_dao->add($new_email);
             };            
@@ -178,15 +169,17 @@
                     $new_cliente_telefone->setIDCliente($idcliente);
                     $new_clientetelefone_dao->update($new_cliente_telefone, $id_tel_atual);
                 };
-                header('location: details.php?cod=' . $idcliente);
-                exit;
+
             } else {
                 $new_endereco_clienteDAO->add($new_endereco_cliente);
-                header('location: details.php?cod=' . $idcliente);
-                exit;
             };
+
+            header('location: details.php?cod=' . $idcliente);
+            exit;
         };
          
+
+        //Adição de novo cliente
         if ($_POST['nome'] != '' && $_POST['sobrenome']!= '' && $_POST['sex']!= '') {
             $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING) . ' ' . filter_input(INPUT_POST, 'sobrenome', FILTER_SANITIZE_STRING);
             $sex = filter_input(INPUT_POST, 'sex', FILTER_SANITIZE_STRING);
