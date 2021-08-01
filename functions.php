@@ -160,6 +160,8 @@
             } elseif (!$idemail_atual && !$checked_email_id) {
                 $new_email->setClienteID($idcliente);
                 $new_email_dao->add($new_email);
+            } elseif ($idemail_atual && $checked_email_id) {
+                $_SESSION['flash_details'] = 'Email em uso!';
             };            
 
             if ($idendereco_atual) {
