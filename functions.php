@@ -148,7 +148,7 @@
             $new_cliente_telefone->setIDTelefone($checked_fone);
         };
 
-        if ($idcliente) {
+        if ($idcliente && $idemail_atual) {
             $new_endereco_cliente->setIDCliente($idcliente);
             $new_email->setEndereco($email);
             $new_email->setClienteID($idcliente);
@@ -160,7 +160,7 @@
             } elseif (!$idemail_atual && !$checked_email_id) {
                 $new_email->setClienteID($idcliente);
                 $new_email_dao->add($new_email);
-            } elseif ($idemail_atual && $checked_email_id) {
+            } elseif ($idemail_atual && ($checked_email_id != $idemail_atual)) {
                 $_SESSION['flash_details'] = 'Email em uso!';
             };            
 
@@ -179,10 +179,17 @@
             header('location: details.php?cod=' . $idcliente);
             exit;
         };
+
+        if ($idcliente) {
+            $new_endereco_cliente->setIDCliente($idcliente);
+            $new_endereco_clienteDAO->add($new_endereco_cliente);
+            header('location: details.php?cod=' . $idcliente);
+            exit;
+        };
          
 
         //Adição de novo cliente
-        if ($_POST['nome'] != '' && $_POST['sobrenome']!= '' && $_POST['sex']!= '') {
+        if (isset($_POST['nome']) && $_POST['sobrenome']!= '' && $_POST['sex']!= '') {
             $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING) . ' ' . filter_input(INPUT_POST, 'sobrenome', FILTER_SANITIZE_STRING);
             $sex = filter_input(INPUT_POST, 'sex', FILTER_SANITIZE_STRING);
 
