@@ -31,7 +31,7 @@
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="icon" href="https://phproberto.gallerycdn.vsassets.io/extensions/phproberto/vscode-php-getters-setters/1.2.3/1525759974843/Microsoft.VisualStudio.Services.Icons.Default" type="image/gif" sizes="16x16">
         <link rel="stylesheet" href="crud.css">
         <title>CRUD - Alteração</title>
@@ -40,12 +40,12 @@
         <?php
             echo "<div id=\"barra\" class=\"col-12 container-fluid\"><a href=\"crud.php\" id=\"volta_crud\" b4>Voltar</a><a href=\"logout.php\" id=\"sair\">Sair</a></div> <div class=\"container-fluid\" id=\"update\">
                     <form action=\"\" method=\"post\" enctype=\"multipart/form-data\">
-                    <fieldset id=\"endereco_completo\">
-                        <div class=\"form-row form-group\">
+                        <fieldset id=\"endereco_completo\">
+                        <div class=\"row\">
                             <legend>Endereço</legend>
                             <div class=\"col-lg-1 col-12\">
                                 <label for=\"logradouro:\">Logradouro:</label>
-                                <select class=\"custom-select\" id=\"logradouro\" name=\"logradouro\" required=\"\">";
+                                <select class=\"form-select\" id=\"logradouro\" name=\"logradouro\" required=\"\">";
                                 $id_meu_logradouro = GetValue('id_logradouro');
                                     foreach ($lista_log as $key => $value){
                                         if ($id_meu_logradouro == $value->getID()) {
@@ -69,7 +69,7 @@
                                 <input type=\"text\" name=\"complemento\" id=\"complemento\" value=\""; echo GetValue('complemento'); echo "\" class=\"form-control\">
                             </div>
                         </div>
-                        <div class=\"form-row form-group\">
+                        <div class=\"row form-group\">
                             <div class=\"col-lg-5 col-12\">
                                 <label for=\"bairro:\">Bairro:</label>
                                 <input type=\"text\" name=\"bairro\" id=\"bairro\" value=\""; echo GetValue('bairro'); echo "\" class=\"form-control\" required=\"\">
@@ -80,7 +80,7 @@
                             </div>
                             <div class=\"col-lg-2 col-12\">
                                 <label for=\"estado:\">Estado:</label>
-                                <select class=\"custom-select\" id=\"estado\" name=\"estado\" required=\"\">";
+                                <select class=\"form-select\" id=\"estado\" name=\"estado\" required=\"\">";
                                 foreach ($lista_estados as $key => $value) {
                                     $estado_selecionado = GetValue('estado');
                                     if ($value->getNome() == $estado_selecionado) {
@@ -94,7 +94,7 @@
                         </div>
                     </fieldset>
                     <fieldset id=\"contato\">
-                        <div class=\"form-row form-group\">
+                        <div class=\"row form-group\">
                             <legend>Contato</legend>
                             <div class=\"col-lg-1 col-12\">
                                 <label for=\"ddd:\">DDD:</label>
@@ -108,7 +108,7 @@
                         </div>
                         <div class=\"col-lg-2 col-12\">
                             <label for=\"tipo_telefone:\">Tipo:</label>
-                            <select class=\"custom-select\" id=\"tipo_telefone\" name=\"tipo_telefone\" required=\"\">";
+                            <select class=\"form-select\" id=\"tipo_telefone\" name=\"tipo_telefone\" required=\"\">";
                             $tipo_telefone = GetValue('tipo_telefone');
                             foreach ($lista_tipos as $key => $value) {
                                 if ($value['id'] == $tipo_telefone) {
@@ -126,7 +126,7 @@
                             </div>
                         </div>
                     </fieldset>
-                    <div class=\"form-row form-group\">
+                    <div class=\"row form-group\">
                         <div class=\"col-lg-2 col-4\">
                             <button type=\"submit\" id=\"submit_clientes\" class=\"btn btn-block btn-success\">Alterar</button>
                         </div>

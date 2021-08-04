@@ -67,36 +67,36 @@
     <body id="fundo">
             <div class="container-fluid">
             <form action="" method="post" class="col-lg-4 offset-lg-4 col-10 offset-1" id="form" enctype="multipart/form-data">
-                <div class="form-row">
-                    <div class="form-group col-lg-12 col-12">
+                <div class="mb-3">
+                    <div class=" col-lg-12 col-12">
                         <label for="nome">Nome Completo:</label>
                         <input type="text" name="nome" id="nome" required="" class="form-control">
                     </div>
-                    <div class="form-group col-lg-12 col-12">
+                    <div class=" col-lg-12 col-12">
                         <label for="username">Username:</label>
                         <input type="text" name="username" id="username" required="" class="form-control">
                     </div>
-                    <div class="form-group col-lg-12 col-12">
+                    <div class=" col-lg-12 col-12">
                         <label for="myfile">Foto:</label>
-                        <input type="file" class="form-control-file" id="myfile" name="myfile" accept="image/*">
+                        <input type="file" class="form-control" id="myfile" name="myfile" accept="image/*">
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-lg-12 col-12">
+                <div class="mb-3">
+                    <div class="col-lg-12 col-12">
                         <label for="senha">Senha:</label>
                         <input type="password" name="senha" id="senha" required="" class="form-control">
                     </div>
-                    <div class="form-group col-lg-12 col-12">
+                    <div class=" col-lg-12 col-12">
                         <label for="senha">Repita sua senha:</label>
                         <input type="password" name="repete_senha" id="repete_senha" required="" class="form-control">
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
+                <div class="mb-3">
+                    <div class="">
                         <input type="submit" value="Cadastre-se" class="btn btn-success" id="btn_cadastre_user">
+                        <p id="faca_login">Faça seu <a href="login.php">login</a></p>
                     </div>
-                </div>                
-                <p class="text-right">Faça seu <a href="login.php">login</a></p>
+                </div> 
             </form>
         </div>     
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>

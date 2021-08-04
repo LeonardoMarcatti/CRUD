@@ -84,6 +84,7 @@ h2{
     background-color: rgba(250, 250, 250, 0.8);
     padding: 15px;
     border-radius: 20px;
+    height: auto;
 }
 
 #consulta_clientes_form{
@@ -91,7 +92,6 @@ h2{
 }
 
 #btn_cadastre_user{
-    float: left;
     margin-top: 10px;
 }
 
@@ -113,6 +113,14 @@ a{
     text-decoration: none;
 }
 
+#faca_login, #cad{
+    float: right;
+}
+
+#faca_login{
+    margin-top: 15px;
+}
+
 #flash{
     color: darkred;
     background-color: white;
@@ -124,4 +132,8 @@ a{
     text-align: center;
     font-weight: bold;
     margin: 10px auto;
+}
+
+#exclude_menu{
+    
 }
