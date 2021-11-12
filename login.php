@@ -30,7 +30,7 @@
     <title>CRUD Login</title>
 </head>
     <body id=fundo>
-        <div class="container-fluid">
+        <div id="form_container">
             <form action="login.php" method="post" class="col-lg-4 offset-lg-4 col-sm-12" id="form">
                 <div class="mb-3">
                     <label for="user">Usuário</label>

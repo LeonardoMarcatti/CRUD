@@ -81,11 +81,10 @@
         $newddd = new DDD();
 
         $newtelefone = new Telefone();
-
         $new_telefone_dao = new TelefoneDAO($conection);
-        $new_clientetelefone_dao = new ClienteTelefoneDAO($conection);
 
         $new_cliente_telefone = new ClienteTelefone();
+        $new_clientetelefone_dao = new ClienteTelefoneDAO($conection);
 
         $id_bairro = $new_bairro_dao->checkBairro($bairro);
         

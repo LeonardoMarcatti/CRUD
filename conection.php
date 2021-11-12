@@ -2,7 +2,7 @@
     $server = 'localhost';
     $db = 'CRUD';
     $user = 'root';
-    $password = '';
+    $password = 'a';
     
     try {
         $conection = new PDO("mysql:host=$server; dbname=$db", "$user", "$password");
