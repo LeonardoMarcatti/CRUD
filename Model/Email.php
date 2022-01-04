@@ -1,5 +1,5 @@
 <?php
-    namespace CRUD\classes;
+    namespace Testes\Projetos\PHP\CRUD\Model;
     
     class Email{
         private int $id;

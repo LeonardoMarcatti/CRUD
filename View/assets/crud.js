@@ -5,14 +5,14 @@ $(document).ready('load', function(e){
     $('#fundo').css('height', h).css('width', w);
 });
 
-$('#repete_senha').on('blur', 
+$('#pass2').on('blur', 
     function() {
-        let senha = $('#senha').val();
-        let senha2 = $('#repete_senha').val()        
-        if ((senha != senha2) && (senha != "" || senha2 != "")) {
+        let pass = $('#pass').val();
+        let pass2 = $('#pass2').val()        
+        if ((pass != pass2) && (pass != "" || pass2 != "")) {
             alert('As senhas não conferem!');
-            $('#repete_senha').val("");
-            $('#senha').val("");
+            $('#pass2').val("");
+            $('#pass').val("");
         };
     }
 );
@@ -21,3 +21,6 @@ setTimeout(() => {
    $('#mensagem').fadeOut(500);
    $('#flash').hide(500);
 }, 1000);
+
+
+$('#telefone').mask('0000-0000');

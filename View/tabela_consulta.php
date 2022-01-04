@@ -1,4 +1,3 @@
-
 <div class="col-6 offset-3">
     <table class="table table-bordered table-striped table-hover text-center">
         <thead class="table-dark">
@@ -14,29 +13,27 @@
             if (!empty($_GET['consulta_nome'])) {
                 $nome = '%' . $_GET['consulta_nome'] . '%';
                 $query .= " where nome like :nome";
-                $result = $conection->prepare($query);
+                $result = $connection->prepare($query);
                 $result->bindParam(':nome', $nome);
                 $result->execute();
             } elseif (!empty($_GET['consulta_id'])) {
                 $id = $_GET['consulta_id'];
                 $query .= " where id = :id";
-                $result = $conection->prepare($query);
+                $result = $connection->prepare($query);
                 $result->bindParam(':id', $id);
                 $result->execute();
             } else{
-                $result = $conection->prepare($query);
+                $result = $connection->prepare($query);
                 $result->execute();
+                
             };            
-            
             foreach ($result as $key => $value) {?>
                 <tr>
                     <th scope="row"><a href="details.php?cod=<?=$value['id']?>"><?= $value['id']?></a></th>
                     <td><a href="details.php?cod=<?=$value['id']?>"><?=$value['nome']?></a></td>
                     <td><a href="exclude.php?del=<?=$value['id']?>"><i class="fas fa-trash-alt"></i></a></</td>
                 </tr>
-            <?php };
-        ?>
+            <?php }; ?>
         </tbody>
-        </div>
     </table>
-    </div>
+</div>

@@ -1,46 +1,50 @@
 <?php
+    namespace Testes\Projetos\PHP\CRUD\Controller;
+
+    require_once '../Config/Connection.php';
+    include_once '../Model/Endereco.php';
+    include_once '../Model/Telefone.php';
+    include_once '../Model/Clientes.php';
+    include_once '../Model/Email.php';
+
+    use Testes\Projetos\PHP\CRUD\Config\Connection;
+    use Testes\Projetos\PHP\CRUD\Model\Email;
+    use Testes\Projetos\PHP\CRUD\Model\EmailDAO;
+    use Testes\Projetos\PHP\CRUD\Model\Clientes;
+    use Testes\Projetos\PHP\CRUD\Model\ClientesDAO;
+    use Testes\Projetos\PHP\CRUD\Model\ClienteTelefoneDAO;
+    use Testes\Projetos\PHP\CRUD\Model\Cidade;
+    use Testes\Projetos\PHP\CRUD\Model\CidadeDAO;
+    use Testes\Projetos\PHP\CRUD\Model\Endereco;
+    use Testes\Projetos\PHP\CRUD\Model\EnderecoDAO;
+    use Testes\Projetos\PHP\CRUD\Model\Bairro;
+    use Testes\Projetos\PHP\CRUD\Model\BairroDAO;
+    use Testes\Projetos\PHP\CRUD\Model\EnderecoCliente;
+    use Testes\Projetos\PHP\CRUD\Model\EnderecoClienteDAO;
+    use Testes\Projetos\PHP\CRUD\Model\DDD;
+    use Testes\Projetos\PHP\CRUD\Model\DDD_DAO;
+    use Testes\Projetos\PHP\CRUD\Model\Telefone;
+    use Testes\Projetos\PHP\CRUD\Model\TelefoneDAO;
+    use Testes\Projetos\PHP\CRUD\Model\ClienteTelefone;
+    use PDO;
+
     session_start();
 
     if (!isset($_SESSION['user'])) {
         header('location: login.php');
         exit;
     };
-
-    require_once 'conection.php';
-    include_once('classes/endereco.php');
-    include_once('classes/telefone.php');
-    include_once('classes/clientes.php');
-    include_once('classes/email.php');
-
-    use CRUD\classes\Email;
-    use CRUD\classes\EmailDAO;
-    use CRUD\classes\Clientes;
-    use CRUD\classes\ClientesDAO;
-    use CRUD\classes\ClienteTelefoneDAO;
-    use CRUD\classes\Cidade;
-    use CRUD\classes\CidadeDAO;
-    use CRUD\classes\Endereco;
-    use CRUD\classes\EnderecoDAO;
-    use CRUD\classes\Bairro;
-    use CRUD\classes\BairroDAO;
-    use CRUD\classes\EnderecoCliente;
-    use CRUD\classes\EnderecoClienteDAO;
-    use CRUD\classes\DDD;
-    use CRUD\classes\DDD_DAO;
-    use CRUD\classes\Telefone;
-    use CRUD\classes\TelefoneDAO;
-    use CRUD\classes\ClienteTelefone;
     
-
     $idendereco_atual = filter_input(INPUT_GET, 'idendereco', FILTER_SANITIZE_NUMBER_INT);
     $idcliente = filter_input(INPUT_GET, 'idcliente', FILTER_SANITIZE_NUMBER_INT);
     $id_tel_atual = filter_input(INPUT_GET, 'idtel', FILTER_SANITIZE_NUMBER_INT);
     $idemail_atual = filter_input(INPUT_GET, 'idemail', FILTER_SANITIZE_NUMBER_INT);
     $del_id = filter_input(INPUT_GET, 'del', FILTER_VALIDATE_INT);
+    $connection = Connection::getConnection();
 
     if (!empty($_POST['delete_id'])) {
         $del = $_POST['delete_id'];
-        $del_dao = new ClientesDAO($conection);
+        $del_dao = new ClientesDAO($connection);
         $del_cliente = new Clientes();
         $del_cliente->setID($del);
         $del_dao->delete($del_cliente);
@@ -63,28 +67,28 @@
         $tipo = filter_input(INPUT_POST, 'tipo_telefone', FILTER_SANITIZE_NUMBER_INT);
 
         $new_endereco = new Endereco();
-        $new_endereco_dao = new EnderecoDAO($conection);
+        $new_endereco_dao = new EnderecoDAO($connection);
 
         $new_bairro = new Bairro();
-        $new_bairro_dao = new BairroDAO($conection);
+        $new_bairro_dao = new BairroDAO($connection);
 
         $new_cidade = new Cidade();
-        $new_cidade_dao = new CidadeDAO($conection);
+        $new_cidade_dao = new CidadeDAO($connection);
 
-        $new_endereco_clienteDAO = new EnderecoClienteDAO($conection);
+        $new_endereco_clienteDAO = new EnderecoClienteDAO($connection);
         $new_endereco_cliente = new EnderecoCliente();
 
         $new_email = new Email();
-        $new_email_dao = new EmailDAO($conection);
+        $new_email_dao = new EmailDAO($connection);
 
-        $new_ddd_dao = new DDD_DAO($conection);
+        $new_ddd_dao = new DDD_DAO($connection);
         $newddd = new DDD();
 
         $newtelefone = new Telefone();
-        $new_telefone_dao = new TelefoneDAO($conection);
+        $new_telefone_dao = new TelefoneDAO($connection);
 
         $new_cliente_telefone = new ClienteTelefone();
-        $new_clientetelefone_dao = new ClienteTelefoneDAO($conection);
+        $new_clientetelefone_dao = new ClienteTelefoneDAO($connection);
 
         $id_bairro = $new_bairro_dao->checkBairro($bairro);
         
@@ -193,7 +197,7 @@
             $sex = filter_input(INPUT_POST, 'sex', FILTER_SANITIZE_STRING);
 
             $new_cliente = new Clientes();
-            $new_cliente_dao =  new ClientesDAO($conection);
+            $new_cliente_dao =  new ClientesDAO($connection);
 
             $new_cliente->setNome($nome);
             $sex_id = $new_cliente_dao->getSexID($sex);
@@ -216,60 +220,31 @@
                 exit;
             };
         };
-    }; 
-
-    function GetUserImage(){
-        global $conection;
-        $current_user = $_SESSION['user'];
-        $sql = "select caminho from users u join image i on u.id = i.iduser where u.nome_de_usuario = :current_user";
-        $path = $conection->prepare($sql);
-        $path->bindValue(':current_user', $current_user);
-        $path->execute();
-        $foto = $path->fetch(PDO::FETCH_ASSOC)['caminho'];
-        if ($foto) {
-            return $foto;
-        } else {
-            return false;
-        };        
-    };
-
-    function GetUserImageTitle(){
-        global $conection;
-        $current_user = $_SESSION['user'];
-        $sql = "select nome from users u join image i on u.id = i.iduser where u.nome_de_usuario = :current_user";
-        $alt = $conection->prepare($sql);
-        $alt->bindParam(':current_user', $current_user);
-        $alt->execute();
-        if ($alt) {
-            return $alt->fetch(PDO::FETCH_ASSOC)['nome'];
-        } else {
-            return false;
-        };        
     };
 
     function getDetails($val){
-        global $conection;
+        global $connection;
         $query = "select * from v_tudo where id = :cod";
-        $result = $conection->prepare($query);
+        $result = $connection->prepare($query);
         $result->bindParam(':cod', $val);
         $result->execute();
         return $result->fetchAll(PDO::FETCH_ASSOC);
     };
 
     function GetValue($value){
-        global $conection, $idcliente, $idendereco_atual, $del_id;
+        global $connection, $idcliente, $idendereco_atual, $del_id;
         
         if ($idcliente) {
             $sql = "select * from v_tudo where id = :value";
-            $result = $conection->prepare($sql);
+            $result = $connection->prepare($sql);
             $result->bindParam(':value', $idcliente);
         } elseif($del_id){
             $sql = "select * from v_tudo where id = :value";
-            $result = $conection->prepare($sql);
+            $result = $connection->prepare($sql);
             $result->bindParam(':value', $del_id);
         }else {            
             $sql = "select * from v_tudo where id_endereco = :value";
-            $result = $conection->prepare($sql);
+            $result = $connection->prepare($sql);
             $result->bindParam(':value', $idendereco_atual);
         };
 

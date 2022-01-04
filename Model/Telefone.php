@@ -1,6 +1,5 @@
 <?php
-
-  namespace CRUD\classes;
+  namespace Testes\Projetos\PHP\CRUD\Model;
 
     class DDD{
       private $id;
@@ -49,7 +48,6 @@
         };
       }
     };
-
 
     class TipoTelefoneDAO{
       private $pdo;

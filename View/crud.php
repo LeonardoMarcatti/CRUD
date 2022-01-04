@@ -1,33 +1,25 @@
 <?php
-    setlocale(LC_ALL, "pt_BR.utf-8");
-    include_once('functions.php');
-    include_once('classes/endereco.php');
-    include_once('classes/telefone.php');
-    include_once('classes/clientes.php');
-    include_once('classes/email.php');
+    namespace Testes\Projetos\PHP\CRUD\View;
+    
+    require_once '../Controller/help.php';
 
-    use CRUD\classes\TipoLogradouroDAO;
-    use CRUD\classes\EstadoDAO;
-    use CRUD\classes\TipoTelefoneDAO;
-
-    $tipo_log = new TipoLogradouroDAO($conection);
-    $tipo = $tipo_log->getAll();
-
-    $estados = new EstadoDAO($conection);
-    $lista_estados = $estados->getAll();
-
-    $telefone = new TipoTelefoneDAO($conection);
-    $lista_tipos_telefone = $telefone->getAll();
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=yes">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="icon" href="https://phproberto.gallerycdn.vsassets.io/extensions/phproberto/vscode-php-getters-setters/1.2.3/1525759974843/Microsoft.VisualStudio.Services.Icons.Default" type="image/gif" sizes="16x16">
-        <link rel="stylesheet" href="crud.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous" defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
+        <script src="https://kit.fontawesome.com/ec29234e56.js" crossorigin="anonymous" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" defer></script>
+        <script src="assets/crud.js" defer></script>
+        <script src="assets/table.js" defer></script>
+        <link rel="stylesheet" href="assets/crud.css">
         <title>CRUD</title>
     </head>
     <body>
@@ -37,10 +29,10 @@
                     <a href=""></a>
                 </div>
                 <div class="col-lg-auto">
-                    <img id="user_image" title="<?php echo GetUserImageTitle()?>" src="img/users/<?php echo GetUserImage()?>">
+                    <img id="user_image" title="<?=$image_info['name']?>" src="../img/users/<?=$image_info['image']?>">
                 </div>
                 <div class="col-lg">
-                    <a href=logout.php id=sair>Sair</a>
+                    <a href=../Controller/logout.php id=sair>Sair</a>
                 </div>
             </div>
         </div>
@@ -61,34 +53,47 @@
             </li>
         </ul>
         <div class="tab-content" id="todas_tabs">
-                <div class="tab-pane fade show active" id="consulta_clientes" role="tabpanel" aria-labelledby="consulta_clientes_tab">
-                    <div class="container-fluid">
-                        <form id="consulta_clientes_form" name="consulta_clientes_form" method="get" action="crud.php">
-                            <div class="row g-3 justify-content-center">
-                                <div class="col-1">
-                                    <label for="consulta_id">ID:</label>
-                                    <input type="text" name="consulta_id" id="consulta_id" class="form-control">
-                                </div>
-                                <div class="col-5">
-                                    <label for="consulta_nome">Nome:</label>
-                                    <input type="text" name="consulta_nome" id="consulta_nome" class="form-control">
-                                </div>
-                                <div class="col-2 align-self-end">
-                                    <button type="submit" id="btn_consulta" class="btn btn-block btn-outline-success">Consultar</button>
-                                    <button type="reset" id="btn_reset_consulta"  class="btn btn-block btn-outline-warning">Limpar</button>
-                                </div>
+            <div class="tab-pane fade show active" id="consulta_clientes" role="tabpanel" aria-labelledby="consulta_clientes_tab">
+                <div class="container-fluid">
+                    <form id="consulta_clientes_form" method="post" action="">
+                        <div class="row g-3 justify-content-center">
+                            <div class="col-1">
+                                <label for="consulta_id">ID:</label>
+                                <input type="number" name="id" id="id" class="form-control">
                             </div>
-                        </form>
+                            <div class="col-5">
+                                <label for="consulta_nome">Nome:</label>
+                                <input type="text" name="name" id="name" class="form-control">
+                            </div>
+                            <div class="col-2 align-self-end">
+                                <button type="submit" id="btn_consulta" class="btn btn-block btn-outline-success">Consultar</button>
+                                <button type="reset" id="btn_reset_consulta"  class="btn btn-block btn-outline-warning">Limpar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <?php 
+                        if (isset($_SESSION['flash']) &&  $_SESSION['flash'] != '') { ?>
+                            <h5 id="flash"><?=$_SESSION['flash'];?></h5>
                             <?php 
-                                if (isset($_SESSION['flash']) &&  $_SESSION['flash'] != '') { ?>
-                                    <h5 id="flash"><?=$_SESSION['flash'];?></h5>
-                                    <?php unset($_SESSION['flash']); 
-                                }; ?>
-                            <?php
-                                include_once('tabela_consulta.php');
+                                unset($_SESSION['flash']);
+                                };
                             ?>
-                    </div>
+                    <div class="col-6 offset-3">
+                        <table class="table table-bordered table-striped table-hover text-center">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="col-1">ID</th>
+                                    <th class="col-9">Nome</th>
+                                    <th class="col-2">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>   
                 </div>
+            </div>
             <div class="tab-pane fade" id="cadastra_clientes" role="tabpanel" aria-labelledby="clientes-tab">
                 <div class="container-fluid">
                 <form id="cadastra_clientes_form" action="crud.php" method="post" enctype="multipart/form-data">
@@ -171,8 +176,7 @@
                                 </div>
                             <div class="col-lg-5 col-9">
                                 <label for="telefone:">Telefone:</label>
-                                <input type="tel" name="telefone" id="telefone" class="form-control" pattern="[0-9]{4}-[0-9]{4}" required="">
-                                <small>Formato: XXXX-XXXX</small>
+                                <input type="tel" name="telefone" id="telefone" class="form-control" required="">
                             </div>
                             <div class="col-lg-2 col-12">
                                 <label for="tipo_telefone:">Tipo:</label>
@@ -201,10 +205,5 @@
                 </div>
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-        <script src="https://kit.fontawesome.com/ec29234e56.js" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="crud.js"></script>
     </body>
 </html>

@@ -143,3 +143,7 @@ a{
     font-weight: bold;
     margin: 10px auto;
 }
+
+i{
+    color: red;
+}

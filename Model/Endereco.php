@@ -1,6 +1,5 @@
 <?php
-
-    namespace CRUD\classes;
+    namespace Testes\Projetos\PHP\CRUD\Model;
 
     class TipoLogradouro{
         private int $id;
