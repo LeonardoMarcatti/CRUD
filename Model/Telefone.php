@@ -2,8 +2,8 @@
   namespace Testes\Projetos\PHP\CRUD\Model;
 
     class DDD{
-      private $id;
-      private $numero;
+      private int $id;
+      private string $numero;
 
       public function setID($id){
         $this->id = $id;
@@ -30,14 +30,14 @@
       }
 
       public function addDDD(DDD $d){
-        $sql = 'insert into ddd(numero) values(:numero)';
+        $sql = 'insert into ddd(number) values(:numero)';
         $insert = $this->pdo->prepare($sql);
         $insert->bindValue(':numero', $d->getNumero());
         $insert->execute();
       }
 
       public function checkDDD(DDD $d){
-        $sql = 'select id from ddd where numero = :numero';
+        $sql = 'select id from ddd where number = :numero';
         $result = $this->pdo->prepare($sql);
         $result->bindValue(':numero', $d->getNumero());
         $result->execute();
@@ -56,7 +56,7 @@
         $this->pdo = $conection;
       }
 
-      public function getAll(){
+      public function getAllTipoTelefones(){
         $lista = array();
         $sql = 'select * from tipo_telefone order by id asc';
         $result = $this->pdo->prepare($sql);
@@ -70,10 +70,8 @@
     };
 
     class Telefone{
-      private int $id;
-      private string $numero;
-      private int $ddd;
-      private string $tipo;
+      private int $id, $ddd;
+      private string $number, $tipo;
 
       public function setID($id){
        $this->id = $id;
@@ -83,12 +81,12 @@
         return $this->id;
       }
 
-      public function setNumero($numero){
-        $this->numero = $numero;
+      public function setNumber($number){
+        $this->number = $number;
       }
 
-      public function getNumero(){
-        return $this->numero;
+      public function getNumber(){
+        return $this->number;
       }
 
       public function setDDD($ddd){
@@ -116,9 +114,9 @@
       }
 
       public function checkTelefone(Telefone $t){
-        $sql = 'select id from telefone where numero = :numero and ddd = :ddd and tipo = :tipo';
+        $sql = 'select id from telefone where number = :number and ddd = :ddd and tipo = :tipo';
         $result = $this->pdo->prepare($sql);
-        $result->bindValue(':numero', $t->getNumero());
+        $result->bindValue(':number', $t->getNumber());
         $result->bindValue(':ddd', $t->getDDD());
         $result->bindValue(':tipo', $t->getTipo());
         $result->execute();
@@ -130,29 +128,14 @@
       }
 
       public function add(Telefone $t){
-        $sql = 'insert into telefone(numero, ddd, tipo) values(:numero, :ddd, :tipo)';
+        $sql = 'insert into telefone(number, ddd, tipo) values(:number, :ddd, :tipo)';
         $insert = $this->pdo->prepare($sql);
-        $insert->bindValue(':numero', $t->getNumero());
+        $insert->bindValue(':number', $t->getNumber());
         $insert->bindValue(':ddd', $t->getDDD());
         $insert->bindValue(':tipo', $t->getTipo());
         $insert->execute();
       }
-
-      public function getAll(){
-        $array = [];
-        $sql = 'select t.id, t.numero, d.numero as "ddd", tt.tipo from telefone t join ddd d on t.ddd = d.id join tipo_telefone tt on t.tipo = tt.id';
-        $result = $this->pdo->prepare($sql);
-        $result->execute();
-        foreach ($result as $key => $value) {
-            $u = new Telefone();
-            $u->setID($value['id']);
-            $u->setNumero($value['numero']);
-            $u->setDDD($value['ddd']);
-            $u->setTipo($value['tipo']);
-            $array[] = $u;
-        };
-        return $array;
-      }
+      
     };
 
     class ClienteTelefone{
@@ -184,7 +167,7 @@
       }
 
       public function add(ClienteTelefone $ct){
-        $sql = "insert into cliente_telefone(id_cliente, id_telefone) values(:id_cliente, :id_telefone)";
+        $sql = "insert into client_telefone(id_cliente, id_telefone) values(:id_cliente, :id_telefone)";
         $insert = $this->pdo->prepare($sql);
         $insert->bindValue(':id_cliente', $ct->getIDCliente());
         $insert->bindValue(':id_telefone', $ct->getIDTelefone());
@@ -192,7 +175,7 @@
       }
 
       public function update(ClienteTelefone $ct, $tel_atual){
-        $sql = "update cliente_telefone set id_telefone = :id_telefone where id_cliente = :id_cliente and id_telefone = :id_telefone_atual";
+        $sql = "update client_telefone set id_telefone = :id_telefone where id_cliente = :id_cliente and id_telefone = :id_telefone_atual";
         $update = $this->pdo->prepare($sql);
         $update->bindValue(':id_cliente', $ct->getIDCliente());
         $update->bindValue(':id_telefone', $ct->getIDTelefone());

@@ -1,6 +1,7 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\View;
     
+    require_once '../View/assets/session.php';
     require_once '../Controller/help.php';
 
 ?>
@@ -96,7 +97,7 @@
             </div>
             <div class="tab-pane fade" id="cadastra_clientes" role="tabpanel" aria-labelledby="clientes-tab">
                 <div class="container-fluid">
-                <form id="cadastra_clientes_form" action="crud.php" method="post" enctype="multipart/form-data">
+                <form id="cadastra_clientes_form" action="../Controller/addClient.php" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <label for="nome">Nome:</label>
@@ -122,17 +123,16 @@
                         <fieldset id="endereco_completo">
                             <div class="row">
                                 <legend>Endereço</legend>
-                                <div class="col-lg-1 col-12">
+                                <div class="col-lg-2 col-12">
                                     <label for="logradouro:">Logradouro:</label>
                                     <select class="form-select" id="logradouro" name="logradouro" required="">
                                         <?php
-                                            foreach ($tipo as $key => $value) {
-                                                echo "<option value=\"" . $value->getID() . "\">" . $value->getNome() . "</option>";
-                                            };
-                                        ?>
+                                            foreach ($tipo as $key => $value) { ?>
+                                                <option value="<?=$value->getID()?>"><?=$value->getName()?></option>
+                                        <?php }; ?>
                                     </select>
                                 </div>
-                                <div class="col-lg-7 col-12">
+                                <div class="col-lg-6 col-12">
                                     <label for="endereco:">Nome:</label>
                                     <input type="text" name="endereco" id="endereco" class="form-control"  required="">
                                 </div>
@@ -159,7 +159,7 @@
                                     <select class="form-select" id="uf" name="estado" required="">
                                         <?php
                                             foreach ($lista_estados as $key => $value) {
-                                                echo "<option label=\"" . $value->getNome() . "\" value=\"" . $value->getID() . "\">" . $value->getNome() . "</option>";
+                                                echo "<option label=\"" . $value->getName() . "\" value=\"" . $value->getID() . "\">" . $value->getName() . "</option>";
                                             };
                                         ?>
                                     </select>

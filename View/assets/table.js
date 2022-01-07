@@ -6,7 +6,7 @@ $(document).ready(function () {
             let list = JSON.parse(response);
             $.each(list, function (i, v) {
                 $('tbody').append(
-                    '<tr><th scope="row"><a href="details.php?cod=' + v.id + '">' + v.id + '</a></th><td><a href="details.php?cod=' + v.id + '">' + v.name + '</a></td><td><a href="exclude.php?del=' + v.id + '"><i class="fas fa-trash-alt"></i></a></</td></tr>'
+                    '<tr><th scope="row"><a href="details.php?id=' + v.id + '">' + v.id + '</a></th><td><a href="details.php?id=' + v.id + '">' + v.name + '</a></td><td><a href="exclude.php?del=' + v.id + '"><i class="fas fa-trash-alt"></i></a></</td></tr>'
                 );
             });
         }
@@ -29,7 +29,7 @@ $('#consulta_clientes_form').on('submit', function(p){
             $('tbody').html('');
             $.each(list, function (i, v) {
                 $('tbody').append(
-                    '<tr><th scope="row"><a href="details.php?cod=' + v.id + '">' + v.id + '</a></th><td><a href="details.php?cod=' + v.id + '">' + v.name + '</a></td><td><a href="exclude.php?del=' + v.id + '"><i class="fas fa-trash-alt"></i></a></</td></tr>'
+                    '<tr><th scope="row"><a href="details.php?id=' + v.id + '">' + v.id + '</a></th><td><a href="details.php?id=' + v.id + '">' + v.name + '</a></td><td><a href="exclude.php?del=' + v.id + '"><i class="fas fa-trash-alt"></i></a></</td></tr>'
                 );
             });
         }

@@ -8,19 +8,9 @@
     use Testes\Projetos\PHP\CRUD\Model\Clientes;
     use Testes\Projetos\PHP\CRUD\Model\ClientesDAO;
 
-    $del_id = filter_input(INPUT_GET, 'del', FILTER_VALIDATE_INT);
-    
+    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
     $connection = Connection::getConnection();
-    $client = new Clientes;
     $dao = new ClientesDAO($connection);
-
-    $client->setID($del_id);
-    $info = $dao->getClientByID($client);
-
-    if (!empty($_POST['del'])) {
-       $dao->delete($client);
-       \header('location: crud.php');
-       exit;
-    };
+    $client_info = $dao->getDetails($id);
 
 ?>

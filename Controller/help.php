@@ -2,7 +2,7 @@
     namespace Testes\Projetos\PHP\CRUD\View;
   
     require_once '../Config/Connection.php';
-    include_once '../Controller/functions.php';
+    //include_once '../Controller/functions.php';
     include_once '../Model/Endereco.php';
     include_once '../Model/Telefone.php';
     include_once '../Model/Image.php';
@@ -22,13 +22,13 @@
 
     $connection = Connection::getConnection();
     $tipo_log = new TipoLogradouroDAO($connection);
-    $tipo = $tipo_log->getAll();
+    $tipo = $tipo_log->getAllLogradouros();
 
     $estados = new EstadoDAO($connection);
-    $lista_estados = $estados->getAll();
+    $lista_estados = $estados->getAllEstados();
 
     $telefone = new TipoTelefoneDAO($connection);
-    $lista_tipos_telefone = $telefone->getAll();
+    $lista_tipos_telefone = $telefone->getAllTipoTelefones();
 
     $user = new User;
     $user->setName($_SESSION['user']);

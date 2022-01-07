@@ -31,7 +31,7 @@
         $photo = $_FILES['myfile']['name'];
         $code = codeGen();
         $name = $code . '_' . $photo;
-        $img->setName($name);
+        $img->setPath($name);
         $img->setUserID($lastAddedID);
         $imgDAO->addImage($img);
 

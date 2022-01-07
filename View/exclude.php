@@ -1,8 +1,8 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\View;
 
+    include_once '../View/assets/session.php';
     include_once '../Controller/delClient.php';
-    
 ?>
 
 <!DOCTYPE html>

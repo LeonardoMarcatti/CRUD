@@ -41,7 +41,7 @@
         }
 
         public function findAll(){
-            $sql = 'select id, name, sex from cliente';
+            $sql = 'select id, name, sex from client';
             $select = $this->pdo->prepare($sql);
             $select->execute();
             $result = $select->fetchAll(PDO::FETCH_ASSOC);
@@ -60,7 +60,7 @@
 
         public function getClientByID(Clientes $c)
         {
-            $sql = 'select id, name from cliente where id = :id';
+            $sql = 'select id, name from client where id = :id';
             $select = $this->pdo->prepare($sql);
             $select->bindValue(':id', $c->getID());
             $select->execute();
@@ -68,38 +68,46 @@
             return $result;
         }
 
-        public function add(Clientes $c){
-            $sql = 'insert into cliente(name, namesex) values(:name, :namesex)';
+        public function addNewClient(Clientes $c){
+            $sql = 'insert into client(name, sex) values(:name, :sex)';
             $insert = $this->pdo->prepare($sql);
             $insert->bindValue(':name', $c->getname());
-            $insert->bindValue(':namesex', $c->getSex());
+            $insert->bindValue(':sex', $c->getSex());
             $insert->execute();
 
             $c->setID($this->pdo->lastInsertId());
         }
 
         public function getSexID($sex){
-            $sql = 'select id from namesex where genero = :genero';
+            $sql = 'select id from sex where gender = :gender';
             $result = $this->pdo->prepare($sql);
-            $result->bindValue(':genero', $sex);
+            $result->bindValue(':gender', $sex);
             $result->execute();
-            $id = $result->fetch()['id'];
+            $id = $result->fetch(PDO::FETCH_ASSOC)['id'];
             return $id;
         }
 
         public function delete(Clientes $c){
-            $sql = 'delete from cliente_telefone where id_cliente = :id; delete from endereco_cliente where id_cliente = :id; delete from email where cliente_id = :id; delete from cliente where id = :id';
+            $sql = 'delete from client_telefone where id_cliente = :id; delete from endereco_client where id_cliente = :id; delete from email where cliente_id = :id; delete from client where id = :id';
             $delete = $this->pdo->prepare($sql);
             $delete->bindValue(':id', $c->getID());
             $delete->execute();
         }
 
         public function getMaxId(){
-            $sql = "select max(id) as 'id' from cliente";
+            $sql = "select max(id) as 'id' from client";
             $result = $this->pdo->prepare($sql);
             $result->execute();
             $id = $result->fetch()['id'];
             return $id;
+        }
+
+        public function getDetails($id){
+            $query = "select * from v_tudo where id=:cod";
+            $result = $this->pdo->prepare($query);
+            $result->bindParam(':cod', $id);
+            $result->execute();
+            return $result->fetchAll(PDO::FETCH_ASSOC);
         }
     };
 ?>
