@@ -158,13 +158,24 @@
         $new_cliente_telefone->setIDCliente($client_id);
         $new_clientetelefone_dao->update($new_cliente_telefone, $current_tel_id);
         
-        if ($email) {
+        if (!empty($email)) {
             $new_email->setAddress($email);
-            if ($new_email_dao->checkEmail($new_email)) {
-                $_SESSION['flash'] = 'Email em uso'; 
-            } else {
+            $checked_email = $new_email_dao->checkEmail($new_email);
+            if (!empty($checked_email)) {
+                if ($checked_email->getClienteID() != $client_id) {
+                    $_SESSION['flash'] = 'Email em uso'; 
+                } else {
+                    $new_email->setClienteID($client_id);
+                    $new_email_dao->update($new_email);
+                };
+            } elseif($client_id && ($current_email_id != '')){
+                $new_email->setClienteID($client_id);
+                $new_email_dao->update($new_email);
+                echo 'a';
+            } else{
                 $new_email->setClienteID($client_id);
                 $new_email_dao->add($new_email);
+                echo 'b';
             };
         }else{
             $new_email_dao->delete($client_id);

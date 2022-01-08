@@ -29,7 +29,7 @@
                 <h2>Exclusão de Cliente</h2>
                 <p>Deseja realmente excluir o cliente <?=$info[0]['name']?>?</p>   
                 <form action="" method="post">
-                    <input type="text" name="del" id="del"  hidden="" value=" <?=$info[0]['name']?> ">
+                    <input type="text" name="del" id="del" hidden value=" <?=$del_id?> ">
                     <div class="form-row form-group">
                         <div class="mb-3">
                             <button type="submit" id="sim" class="btn btn-danger btn-block">Sim</button>

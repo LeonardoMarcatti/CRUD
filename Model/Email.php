@@ -1,8 +1,10 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\Model;
-    
+
+use JetBrains\PhpStorm\NoReturn;
+use PDO;
     class Email{
-        private int $id, $cliente_id;
+        private int $id, $client_id;
         private string $address;
 
         public function setID($id){
@@ -21,12 +23,12 @@
             return $this->address;
         }
 
-        public function setClienteID($cliente_id){
-            $this->cliente_id = $cliente_id;
+        public function setClienteID($client_id){
+            $this->client_id = $client_id;
         }
 
         public function getClienteID(){
-            return $this->cliente_id;
+            return $this->client_id;
         }
     };
 
@@ -38,28 +40,34 @@
         }
 
         public function checkEmail(Email $e){
-            $sql = 'select id from email where address = :address';
-            $result = $this->pdo->prepare($sql);
-            $result->bindValue(':address', $e->getAddress());
-            $result->execute();
-            if ($result->rowCount() > 0) {
-                return $result->fetch()['id'];
+            $sql = 'select * from email where address = :address';
+            $select = $this->pdo->prepare($sql);
+            $select->bindValue(':address', $e->getAddress());
+            $select->execute();
+            if ($select->rowCount() > 0) {
+                $result = $select->fetch(PDO::FETCH_ASSOC);
+
+                $email = new Email;
+                $email->setID($result['id']);
+                $email->setAddress($result['address']);
+                $email->setClienteID($result['client_id']);
+                return $email;
             } else {
                 return false;
             };
         }
 
         public function add(Email $e){
-            $sql = 'insert into email(address, cliente_id) values(:address, :cliente_id)';
+            $sql = 'insert into email(address, client_id) values(:address, :client_id)';
             $insert = $this->pdo->prepare($sql);
             $insert->bindValue(':address', $e->getAddress());
-            $insert->bindValue(':cliente_id', $e->getClienteID());
+            $insert->bindValue(':client_id', $e->getClienteID());
             $insert->execute();
             $e->setID($this->pdo->lastInsertId());
         }
 
         public function update(Email $e){
-            $sql = 'update email set address = :address where cliente_id = :id';
+            $sql = 'update email set address = :address where client_id = :id';
             $update = $this->pdo->prepare($sql);
             $update->bindValue(':address', $e->getAddress());
             $update->bindValue(':id', $e->getClienteID());
@@ -67,7 +75,7 @@
         }
 
         public function delete($id){
-            $sql = 'delete from email where id = :id';
+            $sql = 'delete from email where client_id = :id';
             $delete = $this->pdo->prepare($sql);
             $delete->bindValue(':id', $id);
             $delete->execute();

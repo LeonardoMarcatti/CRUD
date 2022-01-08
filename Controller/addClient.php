@@ -151,10 +151,10 @@
                 $new_email->setClienteID($new_client_id);
                 $new_email_dao->add($new_email);
             };
-
-            header('location: ../View/crud.php');
-            exit;
         };
+
+        header('location: ../View/crud.php');
+        exit;
     };
 
 ?>
