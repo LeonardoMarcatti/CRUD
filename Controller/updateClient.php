@@ -160,14 +160,14 @@
         
         if ($email) {
             $new_email->setAddress($email);
-            if ($new_email_dao->checkEmail($new_email)) {
-                false;
-            } else {
-                $new_email->setClienteID($client_id);
-                $new_email->setAddress($email);
+            $new_email->setClienteID($client_id);
+            $checked_email = $new_email_dao->checkEmail($new_email);
+            if (!$checked_email && !$current_email_id) {
+                $new_email_dao->add($new_email);
+            } elseif(!$checked_email && $current_email_id) {
                 $new_email_dao->update($new_email);
             };
-        }else{
+        }elseif(!$email && $current_email_id){
             $new_email_dao->delete($client_id);
         };
 
