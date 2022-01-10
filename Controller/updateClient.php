@@ -161,7 +161,7 @@
         if ($email) {
             $new_email->setAddress($email);
             if ($new_email_dao->checkEmail($new_email)) {
-                return false;
+                false;
             } else {
                 $new_email->setClienteID($client_id);
                 $new_email->setAddress($email);

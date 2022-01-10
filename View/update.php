@@ -22,62 +22,63 @@
         <title>CRUD - Alteração</title>
     </head>
     <body>
-        <div id="barra" class="col-12 container-fluid"><a href="../View/crud.php" id="volta_crud">Voltar</a><a href="../Controller/logout.php" id="sair">Sair</a></div> <div class="container-fluid" id="update">
-        <form action="" method="post">
-            <fieldset id="endereco_completo">
-                <div class="row">
-                    <legend>Endereço</legend>
-                    <div class="col-lg-2 col-12">
-                        <label for="logradouro:">Logradouro:</label>
-                        <select class="form-select" id="logradouro" name="logradouro" required="">
-                        <?php 
-                            $current_log_id = $current_address_details['id_logradouro'];
-                            foreach ($log_list as $key => $value){
-                                if ($current_log_id == $value->getID()) { ?>
-                                    <option value="<?=$value->getID()?>" selected=""><?=$value->getName()?></option>
-                                <?php } else { ?>
-                                    <option value="<?=$value->getID()?>"><?=$value->getName()?></option>
-                        <?php };
+        <div id="barra" class="col-12 container-fluid"><a href="../View/crud.php" id="volta_crud">Voltar</a><a href="../Controller/logout.php" id="sair">Sair</a></div>
+        <div class="container-fluid" id="update">
+            <form action="" method="post">
+                <fieldset id="endereco_completo">
+                    <div class="row">
+                        <legend>Endereço</legend>
+                        <div class="col-lg-2 col-12">
+                            <label for="logradouro:">Logradouro:</label>
+                            <select class="form-select" id="logradouro" name="logradouro" required="">
+                            <?php 
+                                $current_log_id = $current_address_details['id_logradouro'];
+                                foreach ($log_list as $key => $value){
+                                    if ($current_log_id == $value->getID()) { ?>
+                                        <option value="<?=$value->getID()?>" selected=""><?=$value->getName()?></option>
+                                    <?php } else { ?>
+                                        <option value="<?=$value->getID()?>"><?=$value->getName()?></option>
+                            <?php };
+                                }; ?>
+                            </select>
+                        </div>
+                        <div class="col-lg-5 col-12">
+                            <label for="endereco:">Nome:</label>
+                            <input type="text" name="endereco" id="endereco" value="<?=$current_address_details['logradouro']?>"class="form-control" required="">
+                        </div>
+                        <div class="col-lg-1 col-12">
+                            <label for="numero:">Número:</label>
+                            <input type="number" name="numero" min="0" id="numero"value="<?=$current_address_details['numero']?>" class="form-control" required="">
+                        </div>
+                        <div class="col-lg-4 col-12">
+                            <label for="complemento:">Complemento:</label>
+                            <input type="text" name="complemento" id="complemento" value="<?=$current_address_details['complemento']?>" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-5 col-12">
+                            <label for="bairro:">Bairro:</label>
+                            <input type="text" name="bairro" id="bairro" value="<?=$current_address_details['bairro']?>" class="form-control" required="">
+                        </div>
+                        <div class="col-lg-5 col-12">
+                            <label for="cidade:">Cidade:</label>
+                            <input type="text" name="cidade" id="cidade" value="<?=$current_address_details['cidade']?>" class="form-control" required="">
+                        </div>
+                        <div class="col-lg-2 col-12">
+                            <label for="estado:">Estado:</label>
+                            <select class="form-select" id="estado" name="estado" required="">
+                            <?php
+                            foreach ($state_list as $key => $value) {
+                                if ($value->getID() == $current_state_id) { ?>
+                                    <option value="<?=$value->getID()?>" selected> <?=$value->getName()?> </option>
+                                <?php   } else { ?>
+                                <option value="<?=$value->getID()?>"><?=$value->getName()?></option>
+                            <?php };
                             }; ?>
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-lg-5 col-12">
-                        <label for="endereco:">Nome:</label>
-                        <input type="text" name="endereco" id="endereco" value="<?=$current_address_details['logradouro']?>"class="form-control" required="">
-                    </div>
-                    <div class="col-lg-1 col-12">
-                        <label for="numero:">Número:</label>
-                        <input type="number" name="numero" min="0" id="numero"value="<?=$current_address_details['numero']?>" class="form-control" required="">
-                    </div>
-                    <div class="col-lg-4 col-12">
-                        <label for="complemento:">Complemento:</label>
-                        <input type="text" name="complemento" id="complemento" value="<?=$current_address_details['complemento']?>" class="form-control">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-lg-5 col-12">
-                        <label for="bairro:">Bairro:</label>
-                        <input type="text" name="bairro" id="bairro" value="<?=$current_address_details['bairro']?>" class="form-control" required="">
-                    </div>
-                    <div class="col-lg-5 col-12">
-                        <label for="cidade:">Cidade:</label>
-                        <input type="text" name="cidade" id="cidade" value="<?=$current_address_details['cidade']?>" class="form-control" required="">
-                    </div>
-                    <div class="col-lg-2 col-12">
-                        <label for="estado:">Estado:</label>
-                        <select class="form-select" id="estado" name="estado" required="">
-                        <?php
-                        foreach ($state_list as $key => $value) {
-                            if ($value->getID() == $current_state_id) { ?>
-                                <option value="<?=$value->getID()?>" selected> <?=$value->getName()?> </option>
-                            <?php   } else { ?>
-                            <option value="<?=$value->getID()?>"><?=$value->getName()?></option>
-                        <?php };
-                        }; ?>
-                        </select>
-                    </div>
-                </div>
-            </fieldset>
+                </fieldset>
                 <fieldset id="contato">
                     <div class="row form-group">
                         <legend>Contato</legend>
@@ -115,6 +116,6 @@
                     </div>
                 </div>
             </form>
-            </div>
+        </div>
     </body>
 </html>
