@@ -72,13 +72,6 @@
                             </div>
                         </div>
                     </form>
-                    <?php 
-                        if (isset($_SESSION['flash']) &&  $_SESSION['flash'] != '') { ?>
-                            <h5 id="flash"><?=$_SESSION['flash'];?></h5>
-                            <?php 
-                                unset($_SESSION['flash']);
-                                };
-                            ?>
                     <div class="col-6 offset-3">
                         <table class="table table-bordered table-striped table-hover text-center">
                             <thead class="table-dark">

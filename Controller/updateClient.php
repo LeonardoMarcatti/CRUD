@@ -161,10 +161,11 @@
         if ($email) {
             $new_email->setAddress($email);
             if ($new_email_dao->checkEmail($new_email)) {
-                $_SESSION['flash'] = 'Email em uso'; 
+                return false;
             } else {
                 $new_email->setClienteID($client_id);
-                $new_email_dao->add($new_email);
+                $new_email->setAddress($email);
+                $new_email_dao->update($new_email);
             };
         }else{
             $new_email_dao->delete($client_id);

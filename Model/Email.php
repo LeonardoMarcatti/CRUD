@@ -50,16 +50,16 @@
         }
 
         public function add(Email $e){
-            $sql = 'insert into email(address, cliente_id) values(:address, :cliente_id)';
+            $sql = 'insert into email(address, client_id) values(:address, :client_id)';
             $insert = $this->pdo->prepare($sql);
             $insert->bindValue(':address', $e->getAddress());
-            $insert->bindValue(':cliente_id', $e->getClienteID());
+            $insert->bindValue(':client_id', $e->getClienteID());
             $insert->execute();
             $e->setID($this->pdo->lastInsertId());
         }
 
         public function update(Email $e){
-            $sql = 'update email set address = :address where cliente_id = :id';
+            $sql = 'update email set address = :address where client_id = :id';
             $update = $this->pdo->prepare($sql);
             $update->bindValue(':address', $e->getAddress());
             $update->bindValue(':id', $e->getClienteID());
