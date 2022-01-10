@@ -88,11 +88,8 @@
         }
 
         public function delete(Clientes $c){
-<<<<<<< HEAD
             $sql = 'delete from client_telefone where id_cliente = :id; delete from endereco_client where id_cliente = :id; delete from email where client_id = :id; delete from client where id = :id';
-=======
             $sql = 'call eraseClient(:id)';
->>>>>>> master
             $delete = $this->pdo->prepare($sql);
             $delete->bindValue(':id', $c->getID());
             $delete->execute();
