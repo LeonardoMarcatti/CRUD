@@ -160,6 +160,7 @@
         
         if (!empty($email)) {
             $new_email->setAddress($email);
+<<<<<<< HEAD
             $checked_email = $new_email_dao->checkEmail($new_email);
             if (!empty($checked_email)) {
                 if ($checked_email->getClienteID() != $client_id) {
@@ -176,6 +177,14 @@
                 $new_email->setClienteID($client_id);
                 $new_email_dao->add($new_email);
                 echo 'b';
+=======
+            if ($new_email_dao->checkEmail($new_email)) {
+                return false;
+            } else {
+                $new_email->setClienteID($client_id);
+                $new_email->setAddress($email);
+                $new_email_dao->update($new_email);
+>>>>>>> master
             };
         }else{
             $new_email_dao->delete($client_id);
