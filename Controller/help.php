@@ -2,7 +2,6 @@
     namespace Testes\Projetos\PHP\CRUD\View;
   
     require_once '../Config/Connection.php';
-    //include_once '../Controller/functions.php';
     include_once '../Model/Endereco.php';
     include_once '../Model/Telefone.php';
     include_once '../Model/Image.php';
@@ -37,7 +36,7 @@
     $user_info = $userDAO->getUserByName($user);
 
     $image = new Image;
-    $image->setUserID($user_info['id']);
+    $image->setUserID($user_info->getID());
 
     $imageDAO = new ImageDAO($connection);
     $image_info = $imageDAO->getUserImage($image);

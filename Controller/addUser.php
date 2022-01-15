@@ -11,10 +11,12 @@
     use Testes\Projetos\PHP\CRUD\Model\Image;
     use Testes\Projetos\PHP\CRUD\Model\ImageDAO;
 
-    if (isset($_POST['name']) && isset($_POST['username']) && isset($_POST['pass'])) {
+    if (!empty($_POST['name']) && !empty($_POST['username']) && !empty($_POST['email']) && !empty($_POST['pass'])) {
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
         $username = password_hash(filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING), PASSWORD_BCRYPT);
         $pass = password_hash(filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING), PASSWORD_BCRYPT);
+        $email = \filter_input(\INPUT_POST, 'email', \FILTER_SANITIZE_EMAIL);
+
 
         $connection = Connection::getConnection();
         $user = new User;
@@ -25,6 +27,7 @@
         $user->setName($name);
         $user->setUserName($username);
         $user->setPassword($pass);
+        $user->setEmail($email);
         $userDAO->addUser($user);
 
         $lastAddedID = $userDAO->getLastAddedUser();

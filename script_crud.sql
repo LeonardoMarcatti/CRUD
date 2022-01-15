@@ -17,7 +17,8 @@ create table users(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     username varchar(100) not null unique,
     password varchar(100) not null unique,
-    name varchar(100) not null
+    name varchar(100) not null,
+    email varchar(40) default '' unique
 );
 
 create table image(
