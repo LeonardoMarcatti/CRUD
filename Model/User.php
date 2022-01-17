@@ -76,13 +76,11 @@
             $insert->execute();
         }
 
-        public function updateUser(User $u)
+        public function updateUserPassword(User $u)
         {
-            $sql = 'update users set name = :name, email = :email, password = :password where id = :id';
+            $sql = 'update users set password = :password where id = :id';
             $update = $this->pdo->prepare($sql);
             $update->bindValue(':password', $u->getPassword());
-            $update->bindValue(':name', $u->getName());
-            $update->bindValue(':email', $u->getEmail());
             $update->bindValue(':id', $u->getID());
             $update->execute();
         }
@@ -115,6 +113,27 @@
             $select->bindValue(':name', $u->getName());
             $select->execute();
 
+            if ($select->rowCount() == 1) {
+                $result = $select->fetch(PDO::FETCH_ASSOC);
+
+                $user = new User;
+                $user->setID($result['id']);
+                $user->setName($result['name']);
+                $user->setEmail($result['email']);
+                
+                return $user;
+            };
+            
+            return false;
+        }
+        
+        public function getUserByEmail(User $u)
+        {
+            $sql = 'select * from users where email = :email';
+            $select = $this->pdo->prepare($sql);
+            $select->bindValue(':email', $u->getEmail());
+            $select->execute();
+           
             if ($select->rowCount() == 1) {
                 $result = $select->fetch(PDO::FETCH_ASSOC);
 

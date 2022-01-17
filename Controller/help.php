@@ -1,5 +1,5 @@
 <?php
-    namespace Testes\Projetos\PHP\CRUD\View;
+    namespace Testes\Projetos\PHP\CRUD\Controller;
   
     require_once '../Config/Connection.php';
     include_once '../Model/Endereco.php';
