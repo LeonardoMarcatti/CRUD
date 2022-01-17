@@ -32,7 +32,7 @@
             $token_dao = new TokenDAO($connection);
             $token_dao->insertToken($token);
 
-            echo "<a href=\"../View/redefinir.php?token=$hash\">Redefinir Senha</a>";
+            header('location: ../View/redefinir.php?token=' . $hash);
             exit;
         };
     };
