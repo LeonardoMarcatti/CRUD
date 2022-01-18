@@ -17,10 +17,11 @@ $('#pass2').on('blur',
     }
 );
 
-setTimeout(() => {
-   $('#mensagem').fadeOut(500);
-   $('#flash').hide(500);
-}, 1000);
+$(document).ready(function () { 
+    setInterval(() => {
+        $('#flashBarra').fadeOut(500);
+    }, 2000);
+});
 
 
 $('#telefone').mask('0000-0000');

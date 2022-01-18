@@ -36,9 +36,11 @@
             $token->setID($token_info->getID());
             $token_dao->updateTokenStatus($token);
 
+            \session_start();
+            $_SESSION['flashMensagem'] = 'Nova senha gerada com sucesso!';
+
             \header('location: login.php');
             exit;
-
         };
 
 

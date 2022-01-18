@@ -39,6 +39,10 @@
         $imgDAO->addImage($img);
 
         Submit($_FILES['myfile'], $name);
+
+        \session_start();
+        $_SESSION['flashMensagem'] = 'Usuário criado com sucesso!';
+
         \header('Location: ../View/login.php');
         exit;
     };

@@ -18,7 +18,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous" defer></script>
         <script src="https://kit.fontawesome.com/ec29234e56.js" crossorigin="anonymous" defer></script>
         <link rel="stylesheet" href="assets/crud.css">
-        <script src="assets/crud.js"></script>
+        <script src="assets/crud.js" defer></script>
         <title>Nova Senha</title>
     </head>
     <body id="fundo">

@@ -103,6 +103,10 @@ h2{
     margin-top: 10px;
 }
 
+#cadastre_user{
+    margin-top: 20px;
+}
+
 #form_container{
     display: flex;
     flex-flow: row nowrap;
@@ -123,12 +127,20 @@ h2{
     margin-right: 10px;
 }
 
-.fas:hover{
+.fas:hover {
     color: rgb(252, 67, 34);
 }
 
 a{
     text-decoration: none;
+}
+
+a > .fas{
+    color: blue;
+}
+
+a > .fas:hover{
+    color: blue;
 }
 
 #faca_login, #cad{
@@ -154,4 +166,24 @@ a{
 
 i{
     color: red;
+}
+
+#flashBarra{
+    position: absolute;
+    width: 100%;
+    background-color: rgb(80, 245, 80);
+    height: 50px;
+    top: 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid darkgreen;
+}
+
+#flashBarra > p{
+    font-size: 20px;
+    margin: 0px;
+    padding: 0px;
+    color: darkgreen;
 }
