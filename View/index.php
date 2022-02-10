@@ -31,19 +31,27 @@
         <?php  
                 unset($_SESSION['flashMensagem']);
             }; ?>
+        <?php
+            if (!empty($_SESSION['flashError'])) {?>
+                <div id="flashBarraError">
+                    <p><?=$_SESSION['flashError']?></p>
+                </div>
+        <?php  
+                unset($_SESSION['flashError']);
+            }; ?>
             <form action="../Controller/validateLogin.php" method="post" class="col-lg-4 offset-lg-4 col-12" id="form">
                 <div class="mb-3">
-                    <label for="user">Usuário</label>
+                    <label for="user">Username</label>
                     <input type="text" name="username" id="username" class="form-control" required="">
                 </div>
                 <div class="mb-3">
-                    <label for="password">Senha</label>
+                    <label for="password">Password</label>
                     <input type="password" name="password" id="password" class="form-control" required="">
                 </div>
                 <button type="submit" class="btn btn-success">Login</button>
-                <p id="cad"><a href="cadastro.php" id="cadastre_user">Cadastre-se</a></p>
+                <p id="cad"><a href="logup.php" id="cadastre_user">Log<sup>up</sup></a></p>
                 <div class="mb-3">
-                    <p><a href="esqueci.php" id="cadastre_user"><i class="fas fa-key"></i>Esqueci minha senha</a></p>
+                    <p><a href="esqueci.php" id="cadastre_user"><i class="fas fa-key"></i>Forgot your password?</a></p>
                 </div>
             </form>
         </div>

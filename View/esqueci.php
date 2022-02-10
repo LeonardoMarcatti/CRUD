@@ -26,8 +26,8 @@
                     <label for="email">Email:</label>
                     <input type="email" name="email" id="email" class="form-control" required="">
                 </div>
-                <button type="submit" class="btn btn-success">Enviar</button>
-                <a href=login.php id=sair>Voltar</a>
+                <button type="submit" class="btn btn-success">Send</button>
+                <a href=index.php id=sair>Back</a>
             </form>
         </div>
     </body>

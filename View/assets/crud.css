@@ -168,22 +168,39 @@ i{
     color: red;
 }
 
-#flashBarra{
+#flashBarra, #flashBarraError{
     position: absolute;
     width: 100%;
-    background-color: rgb(80, 245, 80);
     height: 50px;
     top: 0px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
+}
+
+#flashBarraError{
+    background-color: rgb(245, 80, 80);
+    border: 2px solid darkred;
+}
+
+#flashBarra{
+    background-color: rgb(80, 245, 80);
     border: 2px solid darkgreen;
 }
 
-#flashBarra > p{
+
+#flashBarra > p, #flashBarraError > p{
     font-size: 20px;
     margin: 0px;
     padding: 0px;
+    
+}
+
+#flashBarra > p{
     color: darkgreen;
+}
+
+#flashBarraError > p{
+    color: darkred;
 }

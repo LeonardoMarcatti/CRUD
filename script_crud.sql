@@ -144,10 +144,10 @@ call insert_estado();
 delimiter $
 CREATE PROCEDURE insert_tipo_telefone()
 begin
-	INSERT INTO tipo_telefone(tipo) VALUES('Residencial');
-    INSERT INTO tipo_telefone(tipo) VALUES('Comercial');
-	INSERT INTO tipo_telefone(tipo) VALUES('Celular');
-	INSERT INTO tipo_telefone(tipo) VALUES('Outros');
+	INSERT INTO tipo_telefone(tipo) VALUES('Home');
+    INSERT INTO tipo_telefone(tipo) VALUES('Work');
+	INSERT INTO tipo_telefone(tipo) VALUES('Cell Phone');
+	INSERT INTO tipo_telefone(tipo) VALUES('Other');
 end;
 $
 delimiter ;
@@ -168,13 +168,13 @@ call insert_sex();
 delimiter $
 CREATE PROCEDURE insert_tipo_logradouro()
 begin
-	INSERT INTO tipo_logradouro(name) VALUES('Avenida');
-    INSERT INTO tipo_logradouro(name) VALUES('Rua');
-    INSERT INTO tipo_logradouro(name) VALUES('Alameda');
-    INSERT INTO tipo_logradouro(name) VALUES('Praça');
-    INSERT INTO tipo_logradouro(name) VALUES('Beco');
-    INSERT INTO tipo_logradouro(name) VALUES('Via');
-    INSERT INTO tipo_logradouro(name) VALUES('Travessa');
+	INSERT into tipo_logradouro(name) VALUES('Avenue');
+    INSERT into tipo_logradouro(name) VALUES('Street');
+    INSERT into tipo_logradouro(name) VALUES('Pass');
+    INSERT into tipo_logradouro(name) VALUES('Plaza/Square');
+    INSERT into tipo_logradouro(name) VALUES('Alley');
+    INSERT into tipo_logradouro(name) VALUES('Route');
+    INSERT into tipo_logradouro(name) VALUES('Lane');
 end;
 $
 delimiter ;

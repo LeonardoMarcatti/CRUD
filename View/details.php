@@ -20,7 +20,7 @@
         <title>CRUD - Detalhes</title>    
     </head>
     <body>
-        <div id="barra" class="col- container-fluid"><a href="../View/crud.php" id="volta_crud">Voltar</a><a href="../Controller/logout.php" id="sair">Sair</a></div>
+        <div id="barra" class="col- container-fluid"><a href="../View/crud.php" id="volta_crud">Back</a><a href="../Controller/logout.php" id="sair">Logout</a></div>
         <?php
             foreach ($client_info as $key => $value) {
                 if ($key == 0) { ?>
@@ -39,16 +39,16 @@
                         </li>
                         <li>Email: <?=$value['email']?></li>
                         <li>Telefone: (<?=$value['ddd']?>) <?=$value['telefone']?></li>
-                        <a href="update.php?idendereco=<?=$value['id_endereco']?>&idcliente=<?=$value['id']?>&idtel=<?=$value['id_telefone']?>&idemail=<?=$value['id_email']?>">Alterar</a>
+                        <a href="update.php?idendereco=<?=$value['id_endereco']?>&idcliente=<?=$value['id']?>&idtel=<?=$value['id_telefone']?>&idemail=<?=$value['id_email']?>">Update</a>
                 <?php } else { ?>
                     <li><?=$value['tipo_logradouro'] . ' ' . $value['logradouro'] . ' Nº ' .  $value['numero'] . ' - ' . $value['bairro'] . ' - ' . $value['cidade'] . ' - ' . $value['estado']?></li>
                     <li>Email: <?=$value['email']?></li>
                     <li>Telefone: (<?=$value['ddd']?>) <?=$value['telefone']?></li>
-                    <a href="update.php?idendereco=<?=$value['id_endereco']?>&idcliente=<?=$value['id']?>&idtel=<?=$value['id_telefone']?>&idemail=<?=$value['id_email']?>">Alterar</a>
+                    <a href="update.php?idendereco=<?=$value['id_endereco']?>&idcliente=<?=$value['id']?>&idtel=<?=$value['id_telefone']?>&idemail=<?=$value['id_email']?>">Update</a>
                 <?php };  ?>
                 </ol>                    
             <?php  }; ?>
             
-        <a href="addendereco.php?idcliente=<?=$id?>" id="addendereco"><input type="button" value="Adicionar Endereço" class="btn btn-success"></a>
+        <a href="addendereco.php?idcliente=<?=$id?>" id="addendereco"><input type="button" value="Add Address" class="btn btn-success"></a>
     </body>
 </html>

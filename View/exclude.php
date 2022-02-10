@@ -21,13 +21,13 @@
     </head>
     <body>
         <div id=barra class="col- container-fluid">
-            <a href=crud.php id=volta_crud>Voltar</a>
+            <a href=crud.php id=volta_crud>Back</a>
             <a href=../Controller/logout.php id=sair>Sair</a>
         </div>
         <div class="container-fluid">
             <div id="exclude_menu">
-                <h2>Exclusão de Cliente</h2>
-                <p>Deseja realmente excluir o cliente <?=$info[0]['name']?>?</p>   
+                <h2>Delete Client</h2>
+                <p>Do you really want to delete <?=$info[0]['name']?>?</p>   
                 <form action="" method="post">
                     <input type="text" name="del" id="del" hidden value=" <?=$del_id?> ">
                     <div class="form-row form-group">

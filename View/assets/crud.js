@@ -20,6 +20,7 @@ $('#pass2').on('blur',
 $(document).ready(function () { 
     setInterval(() => {
         $('#flashBarra').fadeOut(500);
+        $('#flashBarraError').fadeOut(500);
     }, 2000);
 });
 

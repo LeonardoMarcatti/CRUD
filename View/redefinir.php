@@ -25,15 +25,15 @@
         <div id="form_container">
             <form action="" method="post" id="form" class="col-lg-4 offset-lg-4 col-sm-12">
                 <div class="mb-3">
-                    <label for="pass" class="form-label">Senha:</label>
+                    <label for="pass" class="form-label">Password:</label>
                     <input type="password" name="pass" id="pass" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="pass2" class="form-label">Repita senha:</label>
+                    <label for="pass2" class="form-label">Repeat password:</label>
                     <input type="password" name="pass2" id="pass2" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-danger">Atualizar</button>
+                    <button type="submit" class="btn btn-danger">Change Password</button>
                 </div>
             </form>
         </div>

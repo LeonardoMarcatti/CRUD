@@ -20,14 +20,14 @@
         <title>Adicionar Endereço</title>    
     </head>
     <body>
-        <div id=barra><a href=crud.php id=volta_crud>Voltar</a><a href=../Controller/logout.php id=sair>Sair</a></div>
+        <div id=barra><a href=crud.php id=volta_crud>Back</a><a href=../Controller/logout.php id=sair>Logout</a></div>
         <div class="container-fluid"> 
             <form id="add_address" method="post" action="">
                 <fieldset id="endereco_completo">
                     <div class="form-row form-group">
-                        <legend>Endereço</legend>
+                        <legend>Address</legend>
                         <div class="col-lg-2 col-12">
-                            <label for="logradouro:">Logradouro:</label>
+                            <label for="logradouro:">Way/Path type:</label>
                             <select class="custom-select" id="logradouro" name="logradouro" required="">
                                 <?php
                                     foreach ($listaLogradouros as $key => $value) {?>
@@ -36,29 +36,29 @@
                             </select>
                         </div>
                         <div class="col-lg-6 col-12">
-                            <label for="endereco:">Nome:</label>
+                            <label for="endereco:">Name:</label>
                             <input type="text" name="endereco" id="endereco" class="form-control"  required="">
                         </div>
                         <div class="col-lg-1 col-12">
-                            <label for="numero:">Número:</label>
+                            <label for="numero:">Number:</label>
                             <input type="number" name="numero"  min="0" id="numero" class="form-control" required="">
                         </div>
                         <div class="col-lg-3 col-12">
-                            <label for="complemento:">Complemento:</label>
+                            <label for="complemento:">Complement:</label>
                             <input type="text" name="complemento" id="complemento" value="" class="form-control">
                         </div>
                     </div>
                     <div class="form-row form-group">
                         <div class="col-lg-5 col-12">
-                            <label for="bairro:">Bairro:</label>
+                            <label for="bairro:">District/Neighborhood:</label>
                             <input type="text" name="bairro" id="bairro" class="form-control" required="">
                         </div>
                         <div class="col-lg-5 col-12">
-                            <label for="cidade:">Cidade:</label>
+                            <label for="cidade:">City:</label>
                             <input type="text" name="cidade" id="cidade" class="form-control" required="" >
                         </div>
                         <div class="col-lg-2 col-12">
-                            <label for="estado:">Estado:</label>
+                            <label for="estado:">State:</label>
                             <select class="custom-select" id="uf" name="estado" required="">
                                 <?php
                                     foreach ($listaestados as $key => $value) { ?>
@@ -70,10 +70,10 @@
                 </fieldset>
                 <div class="form-row form-group">
                     <div class="col-lg-2 col-4">
-                        <button type="submit" id="submit_clientes" class="btn btn-block btn-success">Adicionar</button>
+                        <button type="submit" id="submit_clientes" class="btn btn-block btn-success">Add</button>
                     </div>
                     <div class="col-lg-2 col-4">
-                        <button type="reset" id="reset_cliente"  class="btn btn-block btn-warning">Limpar</button>
+                        <button type="reset" id="reset_cliente"  class="btn btn-block btn-warning">Clear</button>
                     </div>
                 </div>
             </form>

@@ -33,23 +33,23 @@
                     <img id="user_image" title="<?=$image_info['name']?>" src="../img/users/<?=$image_info['image']?>">
                 </div>
                 <div class="col-lg">
-                    <a href=../Controller/logout.php id=sair>Sair</a>
+                    <a href=../Controller/logout.php id=sair>Logout</a>
                 </div>
             </div>
         </div>
         <ul class="nav nav-tabs" id="abas" role="tab">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu_consulta">Consulta e Alteração</a>
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu_consulta">Consult and Updates</a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a class="nav-link" data-bs-toggle="tab" role="tab" aria-controls="consulta_clientes" data-bs-target="#consulta_clientes" type="button" id="menu_consulta_clientes" aria-selected="false">Clientes</a>
+                        <a class="nav-link" data-bs-toggle="tab" role="tab" aria-controls="consulta_clientes" data-bs-target="#consulta_clientes" type="button" id="menu_consulta_clientes" aria-selected="false">Clients</a>
                     </li>
                 </ul>
             </li>
             <li class="nav-item dropdown" role="tab">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu_cadastro">Cadastro</a>
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="menu_cadastro">Registration</a>
                 <div class="dropdown-menu">
-                    <a class="nav-link" data-bs-toggle="tab" role="tab" aria-controls="clientes" data-bs-target="#cadastra_clientes" type="button"  aria-selected="false" id="menu_cadastro_clientes">Clientes</a>
+                    <a class="nav-link" data-bs-toggle="tab" role="tab" aria-controls="clientes" data-bs-target="#cadastra_clientes" type="button"  aria-selected="false" id="menu_cadastro_clientes">Clients</a>
                 </div>
             </li>
         </ul>
@@ -63,12 +63,12 @@
                                 <input type="number" name="id" id="id" min="1" placeholder="0" class="form-control">
                             </div>
                             <div class="col-5">
-                                <label for="consulta_nome">Nome:</label>
+                                <label for="consulta_nome">Name:</label>
                                 <input type="text" name="name" id="name" class="form-control">
                             </div>
                             <div class="col-2 align-self-end">
-                                <button type="submit" id="btn_consulta" class="btn btn-block btn-outline-success">Consultar</button>
-                                <button type="reset" id="btn_reset_consulta"  class="btn btn-block btn-outline-warning">Limpar</button>
+                                <button type="submit" id="btn_consulta" class="btn btn-block btn-outline-success">Consult</button>
+                                <button type="reset" id="btn_reset_consulta"  class="btn btn-block btn-outline-warning">Clear</button>
                             </div>
                         </div>
                     </form>
@@ -77,7 +77,7 @@
                             <thead class="table-dark">
                                 <tr>
                                     <th class="col-1">ID</th>
-                                    <th class="col-9">Nome</th>
+                                    <th class="col-9">Name</th>
                                     <th class="col-2">Delete</th>
                                 </tr>
                             </thead>
@@ -93,11 +93,11 @@
                 <form id="cadastra_clientes_form" action="../Controller/addClient.php" method="post" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-lg-6 col-12">
-                            <label for="nome">Nome:</label>
+                            <label for="nome">First Name:</label>
                             <input type="text" name="nome" id="nome" class="form-control" required=""> 
                         </div>
                         <div class="col-lg-6 col-12">
-                            <label for="sobre_nome">Sobrenome:</label>
+                            <label for="sobre_nome">Surname:</label>
                             <input type="text" name="sobrenome" id="sobrenome" class="form-control" required="">
                         </div>
                     </div>
@@ -105,11 +105,11 @@
                         <div class="col">
                             <div class="form-check form-check-inline">
                                 <input type="radio" id="masculino" name="sex" class="form-check-input" value="M" required="">
-                                <label class="form-check-label" for="masculino">Masculino</label>
+                                <label class="form-check-label" for="masculino">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
                                 <input type="radio" id="feminino" name="sex" class="form-check-input" value="F" required="">
-                                <label class="form-check-label" for="feminino">Feminino</label>
+                                <label class="form-check-label" for="feminino">Female</label>
                             </div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                             <div class="row">
                                 <legend>Endereço</legend>
                                 <div class="col-lg-2 col-12">
-                                    <label for="logradouro:">Logradouro:</label>
+                                    <label for="logradouro:">Way/Path type:</label>
                                     <select class="form-select" id="logradouro" name="logradouro" required="">
                                         <?php
                                             foreach ($tipo as $key => $value) { ?>
@@ -126,29 +126,29 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6 col-12">
-                                    <label for="endereco:">Nome:</label>
+                                    <label for="endereco:">Name:</label>
                                     <input type="text" name="endereco" id="endereco" class="form-control"  required="">
                                 </div>
                                 <div class="col-lg-1 col-12">
-                                    <label for="numero:">Número:</label>
+                                    <label for="numero:">Number:</label>
                                     <input type="number" name="numero"  min="0" id="numero" class="form-control" required="">
                                 </div>
                                 <div class="col-lg-3 col-12">
-                                    <label for="complemento:">Complemento:</label>
+                                    <label for="complemento:">Complement:</label>
                                     <input type="text" name="complemento" id="complemento" value="" class="form-control">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-5 col-12 ">
-                                    <label for="bairro:">Bairro:</label>
+                                    <label for="bairro:">District/Neighborhood:</label>
                                     <input type="text" name="bairro" id="bairro" class="form-control" required="">
                                 </div>
                                 <div class="col-lg-5 col-12 ">
-                                    <label for="cidade:">Cidade:</label>
+                                    <label for="cidade:">City:</label>
                                     <input type="text" name="cidade" id="cidade" class="form-control" required="" >
                                 </div>
                                 <div class="col-lg-2 col-12">
-                                    <label for="estado:">Estado:</label>
+                                    <label for="estado:">State/Province:</label>
                                     <select class="form-select" id="uf" name="estado" required="">
                                         <?php
                                             foreach ($lista_estados as $key => $value) {
@@ -161,18 +161,18 @@
                         </fieldset>
                         <fieldset id="contato">
                             <div class="row form-group">
-                                <legend>Contato</legend>
+                                <legend>Contact</legend>
                                 <div class="col-lg-1 col-3">
-                                    <label for="ddd:">DDD:</label>
+                                    <label for="ddd:">Area Code:</label>
                                     <input type="number" name="ddd" id="ddd" class="form-control" pattern="[0-9]{2}" required="">
-                                    <small>Formato: XX</small>
+                                    <small>Format: XX</small>
                                 </div>
                             <div class="col-lg-5 col-9">
-                                <label for="telefone:">Telefone:</label>
+                                <label for="telefone:">Phone:</label>
                                 <input type="tel" name="telefone" id="telefone" class="form-control" required="">
                             </div>
                             <div class="col-lg-2 col-12">
-                                <label for="tipo_telefone:">Tipo:</label>
+                                <label for="tipo_telefone:">Type:</label>
                                 <select class="form-select" id="tipo_telefone" name="tipo_telefone" required="">
                                     <?php 
                                     foreach ($lista_tipos_telefone as $key => $value) { ?>
@@ -188,10 +188,10 @@
                         </fieldset>
                         <div class="row float-end g-2">
                             <div class="col">
-                                <button type="submit" id="submit_clientes" class="btn btn-outline-success">Adicionar</button>
+                                <button type="submit" id="submit_clientes" class="btn btn-outline-success">Add</button>
                             </div>
                             <div class="col">
-                            <button type="reset" id="reset_cliente"  class="btn btn-outline-warning">Limpar</button>
+                            <button type="reset" id="reset_cliente"  class="btn btn-outline-warning">Clear</button>
                             </div>
                         </div>
                     </form>

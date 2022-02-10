@@ -22,12 +22,12 @@
         <title>CRUD - Alteração</title>
     </head>
     <body>
-        <div id="barra" class="col-12 container-fluid"><a href="../View/crud.php" id="volta_crud">Voltar</a><a href="../Controller/logout.php" id="sair">Sair</a></div>
+        <div id="barra" class="col-12 container-fluid"><a href="../View/crud.php" id="volta_crud">Back</a><a href="../Controller/logout.php" id="sair">Logout</a></div>
         <div class="container-fluid" id="update">
             <form action="" method="post">
                 <fieldset id="endereco_completo">
                     <div class="row">
-                        <legend>Endereço</legend>
+                        <legend>Address</legend>
                         <div class="col-lg-2 col-12">
                             <label for="logradouro:">Logradouro:</label>
                             <select class="form-select" id="logradouro" name="logradouro" required="">
@@ -43,29 +43,29 @@
                             </select>
                         </div>
                         <div class="col-lg-5 col-12">
-                            <label for="endereco:">Nome:</label>
+                            <label for="endereco:">Name:</label>
                             <input type="text" name="endereco" id="endereco" value="<?=$current_address_details['logradouro']?>"class="form-control" required="">
                         </div>
                         <div class="col-lg-1 col-12">
-                            <label for="numero:">Número:</label>
+                            <label for="numero:">Number:</label>
                             <input type="number" name="numero" min="0" id="numero"value="<?=$current_address_details['numero']?>" class="form-control" required="">
                         </div>
                         <div class="col-lg-4 col-12">
-                            <label for="complemento:">Complemento:</label>
+                            <label for="complemento:">Complement:</label>
                             <input type="text" name="complemento" id="complemento" value="<?=$current_address_details['complemento']?>" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-lg-5 col-12">
-                            <label for="bairro:">Bairro:</label>
+                            <label for="bairro:">District/Neighborhood:</label>
                             <input type="text" name="bairro" id="bairro" value="<?=$current_address_details['bairro']?>" class="form-control" required="">
                         </div>
                         <div class="col-lg-5 col-12">
-                            <label for="cidade:">Cidade:</label>
+                            <label for="cidade:">City:</label>
                             <input type="text" name="cidade" id="cidade" value="<?=$current_address_details['cidade']?>" class="form-control" required="">
                         </div>
                         <div class="col-lg-2 col-12">
-                            <label for="estado:">Estado:</label>
+                            <label for="estado:">State:</label>
                             <select class="form-select" id="estado" name="estado" required="">
                             <?php
                             foreach ($state_list as $key => $value) {
@@ -83,16 +83,16 @@
                     <div class="row form-group">
                         <legend>Contato</legend>
                         <div class="col-lg-1 col-12">
-                            <label for="ddd:">DDD:</label>
+                            <label for="ddd:">Area Code:</label>
                             <input type="number" name="ddd" id="ddd" value="<?=$current_address_details['ddd']?>" class="form-control" pattern="[0-9]{2}" required="">
-                            <small>Formato: XX</small>
+                            <small>Format: XX</small>
                         </div>
                     <div class="col-lg-3 col-12">
-                        <label for="telefone:">Telefone:</label>
+                        <label for="telefone:">Phone:</label>
                         <input type="tel" name="telefone" id="telefone" value="<?=$current_address_details['telefone']?>" class="form-control" required="">
                     </div>
                     <div class="col-lg-2 col-12">
-                        <label for="tipo_telefone:">Tipo:</label>
+                        <label for="tipo_telefone:">Type:</label>
                         <select class="form-select" id="tipo_telefone" name="tipo_telefone" required="">";
                         <?php 
                             foreach ($telefone_types as $key => $value) {
@@ -112,7 +112,7 @@
                 </fieldset>
                 <div class="row form-group">
                     <div class="col-lg-2 col-4">
-                        <button type="submit" id="submit_clientes" class="btn btn-block btn-success">Alterar</button>
+                        <button type="submit" id="submit_clientes" class="btn btn-block btn-success">Update</button>
                     </div>
                 </div>
             </form>

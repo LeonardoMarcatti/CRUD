@@ -34,6 +34,11 @@
 
             header('location: ../View/redefinir.php?token=' . $hash);
             exit;
+        }else{
+            \session_start();
+            $_SESSION['flashError'] = 'Email not found!';
+            header('location: ../View/index.php');
+            exit;
         };
     };
 ?>

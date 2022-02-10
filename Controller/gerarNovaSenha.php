@@ -37,15 +37,15 @@
             $token_dao->updateTokenStatus($token);
 
             \session_start();
-            $_SESSION['flashMensagem'] = 'Nova senha gerada com sucesso!';
+            $_SESSION['flashMensagem'] = 'Password updated successfully!';
 
-            \header('location: login.php');
+            \header('location: index.php');
             exit;
         };
 
 
     } else{
-        \header('location: login.php');
+        \header('location: index.php');
         exit;
     };
 
