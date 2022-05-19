@@ -33,8 +33,8 @@
         $lastAddedID = $userDAO->getLastAddedUser();
         $photo = $_FILES['myfile']['name'];
         $code = codeGen();
-        $name = $code . '_' . $photo;
-        $img->setPath($name);
+        $photo_name = $code . '_' . $photo;
+        $img->setPath($photo_name);
         $img->setUserID($lastAddedID);
         $imgDAO->addImage($img);
 
@@ -43,7 +43,7 @@
         \session_start();
         $_SESSION['flashMensagem'] = 'Usuário criado com sucesso!';
 
-        \header('Location: ../View/login.php');
+        \header('Location: ../View/index.php');
         exit;
     };
 

@@ -36,7 +36,7 @@
             };
         };
 
-        header('location: ../View/login.php');
+        header('location: ../View/index.php');
         exit;
     };
 ?>
