@@ -1,6 +1,14 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\Controller;
 
+    if (file_exists('/var/www/html/programacao/testes/Projetos/PHP/CRUD/Model/TipoLogradouroDAO.php')) {
+        echo 'ok';
+    } else {
+        echo 'n';
+    };
+
+    echo "<br>" . __DIR__ . "<br>";
+        
     spl_autoload_register(
         function ($class)
         {
@@ -16,12 +24,8 @@
     );
 
     use Testes\Projetos\PHP\CRUD\Config\Connection;
-    use Testes\Projetos\PHP\CRUD\Model\Clientes;
-    use Testes\Projetos\PHP\CRUD\Model\ClientesDAO;
+    use Testes\Projetos\PHP\CRUD\Model\TipoLogradouroDAO;
 
-    $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
     $connection = Connection::getConnection();
-    $dao = new ClientesDAO($connection);
-    $client_info = $dao->getDetails($id);
-
-?>
+    $tipo_log = new TipoLogradouroDAO($connection);

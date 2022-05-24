@@ -1,11 +1,19 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\Controller;
 
-    require_once '../Model/Clientes.php';
-    require_once '../Model/Email.php';
-    require_once '../Model/Endereco.php';
-    require_once '../Model/Telefone.php';
-    require_once '../Config/Connection.php';
+    spl_autoload_register(
+        function ($class)
+        {
+            $pathToClass = explode('\\', $class);
+            $class = end($pathToClass);
+
+            if (file_exists(str_replace('Controller', 'Model/', __DIR__) . $class . '.php')) {
+                require_once str_replace('Controller', 'Model/', __DIR__) . $class . '.php';
+            } else {
+                require_once str_replace('Controller', 'Config/', __DIR__) . $class . '.php';
+            };
+        }
+    );
 
     use Testes\Projetos\PHP\CRUD\Config\Connection;
     use Testes\Projetos\PHP\CRUD\Model\Clientes;
@@ -60,15 +68,15 @@
     if (!empty($_POST['logradouro']) && $_POST['endereco'] && $_POST['numero'] && $_POST['bairro'] && $_POST['cidade'] && $_POST['estado'] && $_POST['ddd'] && $_POST['telefone'] && $_POST['tipo_telefone']) {
 
         $logradouro = filter_input(INPUT_POST, 'logradouro', FILTER_SANITIZE_NUMBER_INT);
-        $endereco = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_STRING);
+        $endereco = filter_input(INPUT_POST, 'endereco', FILTER_UNSAFE_RAW);
         $numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_NUMBER_INT);
-        $complemento = filter_input(INPUT_POST, 'complemento', FILTER_SANITIZE_STRING);
-        $bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_STRING);
-        $cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
+        $complemento = filter_input(INPUT_POST, 'complemento', FILTER_UNSAFE_RAW);
+        $bairro = filter_input(INPUT_POST, 'bairro', FILTER_UNSAFE_RAW);
+        $cidade = filter_input(INPUT_POST, 'cidade', FILTER_UNSAFE_RAW);
         $estado = filter_input(INPUT_POST, 'estado', FILTER_SANITIZE_NUMBER_INT);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $ddd = filter_input(INPUT_POST, 'ddd', FILTER_SANITIZE_NUMBER_INT);
-        $tel = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
+        $tel = filter_input(INPUT_POST, 'telefone', FILTER_UNSAFE_RAW);
         $tipo = filter_input(INPUT_POST, 'tipo_telefone', FILTER_SANITIZE_NUMBER_INT);
 
         $new_endereco = new Endereco();

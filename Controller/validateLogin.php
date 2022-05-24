@@ -1,8 +1,19 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\Controller;
 
-    require_once '../Config/Connection.php';
-    require_once '../Model/User.php';
+    spl_autoload_register(
+        function ($class)
+        {
+            $pathToClass = explode('\\', $class);
+            $class = end($pathToClass);
+
+            if (file_exists(str_replace('Controller', 'Model/', __DIR__) . $class . '.php')) {
+                require_once str_replace('Controller', 'Model/', __DIR__) . $class . '.php';
+            } else {
+                require_once str_replace('Controller', 'Config/', __DIR__) . $class . '.php';
+            };
+        }
+    );
 
     use Testes\Projetos\PHP\CRUD\Config\Connection;
     use Testes\Projetos\PHP\CRUD\Model\User;
@@ -11,8 +22,8 @@
     session_start();    
 
     if (isset($_POST['username']) && isset($_POST['password'])) {
-        $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
-        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+        $username = filter_input(INPUT_POST, 'username', FILTER_UNSAFE_RAW);
+        $password = filter_input(INPUT_POST, 'password', FILTER_UNSAFE_RAW);
 
         $connection = Connection::getConnection();
         $user = new User;

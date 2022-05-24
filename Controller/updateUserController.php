@@ -1,10 +1,19 @@
 <?php
      namespace Testes\Projetos\PHP\CRUD\Controller;
 
-     require_once '../View/assets/session.php';
-     require_once '../Config/Connection.php';
-     require_once '../Model/User.php';
+     spl_autoload_register(
+        function ($class)
+        {
+            $pathToClass = explode('\\', $class);
+            $class = end($pathToClass);
 
+            if (file_exists(str_replace('Controller', 'Model/', __DIR__) . $class . '.php')) {
+                require_once str_replace('Controller', 'Model/', __DIR__) . $class . '.php';
+            } else {
+                require_once str_replace('Controller', 'Config/', __DIR__) . $class . '.php';
+            };
+        }
+    );
      use Testes\Projetos\PHP\CRUD\Config\Connection;
      use Testes\Projetos\PHP\CRUD\Model\User;
      use Testes\Projetos\PHP\CRUD\Model\UserDAO;
@@ -29,15 +38,15 @@
 
 
      if (!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['pass'])) {
-         $name = \filter_input(\INPUT_POST, 'name', \FILTER_SANITIZE_STRING);
+         $name = \filter_input(\INPUT_POST, 'name', \FILTER_UNSAFE_RAW);
          $email = \filter_input(\INPUT_POST, 'email', \FILTER_SANITIZE_EMAIL);
-         $pass = password_hash(filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING), PASSWORD_BCRYPT);
+         $pass = password_hash(filter_input(INPUT_POST, 'pass', FILTER_UNSAFE_RAW), PASSWORD_BCRYPT);
 
          $user->setName($name);
          $user->setEmail($email);
          $user->setPassword($pass);
 
-         $user_dao->updateUser($user);
+         $user_dao->updateUserPassword($user);
 
          \header('location: ../View/crud.php');
          exit;

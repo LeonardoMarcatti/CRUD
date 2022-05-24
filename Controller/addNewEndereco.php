@@ -1,9 +1,19 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\Controller;
 
-    require_once '../Model/Clientes.php';
-    require_once '../Model/Endereco.php';
-    require_once '../Config/Connection.php';
+    spl_autoload_register(
+        function ($class)
+        {
+            $pathToClass = explode('\\', $class);
+            $class = end($pathToClass);
+
+            if (file_exists(str_replace('Controller', 'Model/', __DIR__) . $class . '.php')) {
+                require_once str_replace('Controller', 'Model/', __DIR__) . $class . '.php';
+            } else {
+                require_once str_replace('Controller', 'Config/', __DIR__) . $class . '.php';
+            };
+        }
+    );
 
     use Testes\Projetos\PHP\CRUD\Config\Connection;
     use Testes\Projetos\PHP\CRUD\Model\Endereco;
@@ -43,11 +53,11 @@
     if (!empty($_POST['logradouro']) && !empty($_POST['endereco']) && !empty($_POST['numero']) && !empty($_POST['bairro']) && !empty($_POST['cidade']) && !empty($_POST['estado'])) {
 
         $logradouro = filter_input(INPUT_POST, 'logradouro', FILTER_SANITIZE_NUMBER_INT);
-        $endereco = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_STRING);
+        $endereco = filter_input(INPUT_POST, 'endereco', FILTER_UNSAFE_RAW);
         $numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_NUMBER_INT);
-        $complemento = filter_input(INPUT_POST, 'complemento', FILTER_SANITIZE_STRING);
-        $bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_STRING);
-        $cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
+        $complemento = filter_input(INPUT_POST, 'complemento', FILTER_UNSAFE_RAW);
+        $bairro = filter_input(INPUT_POST, 'bairro', FILTER_UNSAFE_RAW);
+        $cidade = filter_input(INPUT_POST, 'cidade', FILTER_UNSAFE_RAW);
         $estado = filter_input(INPUT_POST, 'estado', FILTER_SANITIZE_NUMBER_INT);
 
         $id_bairro = $new_bairro_dao->checkBairro($bairro);

@@ -1,8 +1,8 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\Model;
-    class Clientes
-    {
-        private int $id, $sex;
+
+    class Cidade{
+        private int $id;
         private string $name;
 
         public function setID($id){
@@ -19,13 +19,5 @@
 
         public function getName(){
             return $this->name;
-        }
-
-        public function setSex($sex){
-            $this->sex = $sex;
-        }
-
-        public function getSex(){
-            return $this->sex;
         }
     }

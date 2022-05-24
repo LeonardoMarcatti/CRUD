@@ -1,8 +1,19 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\Controller;
 
-    include_once '../Model/Clientes.php';
-    include_once '../Config/Connection.php';
+    spl_autoload_register(
+        function ($class)
+        {
+            $pathToClass = explode('\\', $class);
+            $class = end($pathToClass);
+
+            if (file_exists(str_replace('Controller', 'Model/', __DIR__) . $class . '.php')) {
+                require_once str_replace('Controller', 'Model/', __DIR__) . $class . '.php';
+            } else {
+                require_once str_replace('Controller', 'Config/', __DIR__) . $class . '.php';
+            };
+        }
+    );
 
     use Testes\Projetos\PHP\CRUD\Config\Connection;
     use Testes\Projetos\PHP\CRUD\Model\Clientes;

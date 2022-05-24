@@ -1,12 +1,20 @@
 <?php
     namespace Testes\Projetos\PHP\CRUD\Controller;
 
-    require_once '../Model/Clientes.php';
-    require_once '../Model/Email.php';
-    require_once '../Model/Endereco.php';
-    require_once '../Model/Telefone.php';
-    require_once '../Config/Connection.php';
+    spl_autoload_register(
+        function ($class)
+        {
+            $pathToClass = explode('\\', $class);
+            $class = end($pathToClass);
 
+            if (file_exists(str_replace('Controller', 'Model/', __DIR__) . $class . '.php')) {
+                require_once str_replace('Controller', 'Model/', __DIR__) . $class . '.php';
+            } else {
+                require_once str_replace('Controller', 'Config/', __DIR__) . $class . '.php';
+            };
+        }
+    );
+    
     use Testes\Projetos\PHP\CRUD\Config\Connection;
     use Testes\Projetos\PHP\CRUD\Model\Clientes;
     use Testes\Projetos\PHP\CRUD\Model\ClientesDAO;
@@ -17,22 +25,19 @@
     use Testes\Projetos\PHP\CRUD\Model\BairroDAO;
     use Testes\Projetos\PHP\CRUD\Model\Cidade;
     use Testes\Projetos\PHP\CRUD\Model\CidadeDAO;
-    use Testes\Projetos\PHP\CRUD\Model\Estado;
-    use Testes\Projetos\PHP\CRUD\Model\EstadoDAO;
     use Testes\Projetos\PHP\CRUD\Model\EnderecoDAO;
     use Testes\Projetos\PHP\CRUD\Model\Telefone;
     use Testes\Projetos\PHP\CRUD\Model\TelefoneDAO;
     use Testes\Projetos\PHP\CRUD\Model\EnderecoCliente;
     use Testes\Projetos\PHP\CRUD\Model\EnderecoClienteDAO;
-    use Testes\Projetos\PHP\CRUD\Model\TipoTelefoneDAO;
     use Testes\Projetos\PHP\CRUD\Model\ClienteTelefone;
     use Testes\Projetos\PHP\CRUD\Model\ClienteTelefoneDAO;
     use Testes\Projetos\PHP\CRUD\Model\DDD;
     use Testes\Projetos\PHP\CRUD\Model\DDD_DAO;
 
     if (isset($_POST['nome']) && $_POST['sobrenome']!= '' && $_POST['sex']!= '') {
-        $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING) . ' ' . filter_input(INPUT_POST, 'sobrenome', FILTER_SANITIZE_STRING);
-        $sex = filter_input(INPUT_POST, 'sex', FILTER_SANITIZE_STRING);
+        $nome = filter_input(INPUT_POST, 'nome', FILTER_UNSAFE_RAW) . ' ' . filter_input(INPUT_POST, 'sobrenome', FILTER_UNSAFE_RAW);
+        $sex = filter_input(INPUT_POST, 'sex', FILTER_UNSAFE_RAW);
 
         $connection = Connection::getConnection();
         $new_cliente = new Clientes();
@@ -45,15 +50,15 @@
         $new_client_id = $new_cliente_dao->getMaxId();
 
         $logradouro = filter_input(INPUT_POST, 'logradouro', FILTER_SANITIZE_NUMBER_INT);
-        $endereco = filter_input(INPUT_POST, 'endereco', FILTER_SANITIZE_STRING);
+        $endereco = filter_input(INPUT_POST, 'endereco', FILTER_UNSAFE_RAW);
         $numero = filter_input(INPUT_POST, 'numero', FILTER_SANITIZE_NUMBER_INT);
-        $complemento = filter_input(INPUT_POST, 'complemento', FILTER_SANITIZE_STRING);
-        $bairro = filter_input(INPUT_POST, 'bairro', FILTER_SANITIZE_STRING);
-        $cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_STRING);
+        $complemento = filter_input(INPUT_POST, 'complemento', FILTER_UNSAFE_RAW);
+        $bairro = filter_input(INPUT_POST, 'bairro', FILTER_UNSAFE_RAW);
+        $cidade = filter_input(INPUT_POST, 'cidade', FILTER_UNSAFE_RAW);
         $estado = filter_input(INPUT_POST, 'estado', FILTER_SANITIZE_NUMBER_INT);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
         $ddd = filter_input(INPUT_POST, 'ddd', FILTER_SANITIZE_NUMBER_INT);
-        $tel = filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_STRING);
+        $tel = filter_input(INPUT_POST, 'telefone', FILTER_UNSAFE_RAW);
         $tipo = filter_input(INPUT_POST, 'tipo_telefone', FILTER_SANITIZE_NUMBER_INT);
 
         $new_endereco = new Endereco();
