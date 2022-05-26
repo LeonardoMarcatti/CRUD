@@ -48,7 +48,7 @@
         $img->setUserID($lastAddedID);
         $imgDAO->addImage($img);
 
-        Submit($_FILES['myfile'], $name);
+        Submit($_FILES['myfile'], $photo_name);
 
         \session_start();
         $_SESSION['flashMensagem'] = 'Usuário criado com sucesso!';

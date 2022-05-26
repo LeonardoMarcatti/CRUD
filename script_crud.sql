@@ -72,7 +72,7 @@ create table estado(
 
 CREATE TABLE tipo_logradouro (
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(10) NOT NULL
+	name VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE endereco(
@@ -103,6 +103,15 @@ CREATE TABLE email(
     address VARCHAR(50) unique,
     client_id INT UNSIGNED NOT NULL unique,
     CONSTRAINT email_cliente FOREIGN KEY(client_id) REFERENCES client(id)
+);
+
+create table users_token(
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id int unsigned not null,
+    CONSTRAINT user_id_users FOREIGN KEY(user_id) REFERENCES users(id),
+    used char(1) default 0 not null,
+    expire_in datetime not null,
+    hash char(32) not null
 );
 
 delimiter $
