@@ -22,7 +22,7 @@
         {
             $db = self::getInstance();
             try {
-                $db->connection = new PDO("mysql:host=localhost; dbname=CRUD", 'leo', 'Aa689311$');
+                $db->connection = new PDO("mysql:host=localhost; dbname=CRUD", 'leo', 'Aa119539$');
                 $db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (Throwable $th) {
                 echo 'Erro linha: ' . $th->getLine() . "<br>";
@@ -30,5 +30,4 @@
             };
             return $db->connection;
         }
-    };    
-?>
+    };
