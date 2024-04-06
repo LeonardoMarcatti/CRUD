@@ -22,12 +22,12 @@
         {
             $db = self::getInstance();
             try {
-                $db->connection = new PDO("mysql:host=localhost; dbname=CRUD", 'leo', 'Aa119539$');
-                $db->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $db->conn = new PDO("mysql:host=localhost; dbname=CRUD", 'leo', 'Aa119539$');
+                $db->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (Throwable $th) {
                 echo 'Erro linha: ' . $th->getLine() . "<br>";
                 echo ('Código: ' . $th->getMessage());
             };
-            return $db->connection;
+            return $db->conn;
         }
     };

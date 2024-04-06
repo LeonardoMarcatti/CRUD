@@ -27,7 +27,7 @@
                     <div class="form-row form-group">
                         <legend>Address</legend>
                         <div class="col-lg-2 col-12">
-                            <label for="logradouro:">Way/Path type:</label>
+                            <label for="logradouro">Way/Path type:</label>
                             <select class="custom-select" id="logradouro" name="logradouro" required="">
                                 <?php
                                     foreach ($listaLogradouros as $key => $value) {?>
@@ -36,29 +36,29 @@
                             </select>
                         </div>
                         <div class="col-lg-6 col-12">
-                            <label for="endereco:">Name:</label>
+                            <label for="endereco">Name:</label>
                             <input type="text" name="endereco" id="endereco" class="form-control"  required="">
                         </div>
                         <div class="col-lg-1 col-12">
-                            <label for="numero:">Number:</label>
+                            <label for="numero">Number:</label>
                             <input type="number" name="numero"  min="0" id="numero" class="form-control" required="">
                         </div>
                         <div class="col-lg-3 col-12">
-                            <label for="complemento:">Complement:</label>
+                            <label for="complemento">Complement:</label>
                             <input type="text" name="complemento" id="complemento" value="" class="form-control">
                         </div>
                     </div>
                     <div class="form-row form-group">
                         <div class="col-lg-5 col-12">
-                            <label for="bairro:">District/Neighborhood:</label>
+                            <label for="bairro">District/Neighborhood:</label>
                             <input type="text" name="bairro" id="bairro" class="form-control" required="">
                         </div>
                         <div class="col-lg-5 col-12">
-                            <label for="cidade:">City:</label>
+                            <label for="cidade">City:</label>
                             <input type="text" name="cidade" id="cidade" class="form-control" required="" >
                         </div>
                         <div class="col-lg-2 col-12">
-                            <label for="estado:">State:</label>
+                            <label for="uf">State:</label>
                             <select class="custom-select" id="uf" name="estado" required="">
                                 <?php
                                     foreach ($listaestados as $key => $value) { ?>
